@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { AiFillEdit,AiFillEuroCircle } from "react-icons/ai";
 
-const Form = () => {
+const Form = ({addOne}) => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:""});
     const changeHandler=(e)=>{
         setFormValues({...formValues,[e.target.name]:e.target.value});
     }
     const submitHandler=(e)=>{
         e.preventDefault();
-        console.log(formValues)
+        addOne(formValues)
     }
     return ( 
         <div>

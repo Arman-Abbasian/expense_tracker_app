@@ -1,5 +1,21 @@
 {
   "expenses": [
-   
+   {
+    "id":1,
+    "name":"food",
+    "cost":20,
+    "type":"expense"
+   },
+   {
+    "id":2,  
+    "name":"work",
+    "cost":10,
+    "type":"income"
+   },{
+    "id":3,
+    "name":"purchase",
+    "cost":40,
+    "type":"expense"
+   }
   ]
 }
