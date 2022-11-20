@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import CostDetail from "../components/CostDetail";
 import Costs from "../components/Costs";
 import  Form  from "../components/Form";
@@ -32,13 +32,24 @@ const Balance = () => {
 
     const addOneConstHandler=(formData)=>{
         axios.post(`http://localhost:4000/expenses`,formData)
-        .then(res=>fetchData(res.data))
+        .then(res=>{
+            fetchData();
+            toast.success("cost added successfully")
+        })
         .catch(err=>toast.error(err.message))
     }
     const showDetail=(id)=>{
         const selectedItem=balance.balance.find(item=>item.id===id);
         setCostItem(selectedItem);
-        console.log(costItem)
+        // setCostItem(state=>{
+        //     setCostItem(state);
+        //     console.log(state)
+        //     return state;
+        // })
+        
+    }
+    const closeCostDetail=()=>{
+        setCostItem(null);
     }
 
     const rendered=()=>{
@@ -54,7 +65,7 @@ const Balance = () => {
                 {showForm && <Form addOne={addOneConstHandler} className="transition-all duration-700" />}
                 <ShowTotalCosts expense={expense} />
                 <Costs balance={balance.balance} showDetail={showDetail} className="w-full" />
-                {costItem && <CostDetail costItem={costItem} className="hidden"/>}
+                {costItem && <CostDetail costItem={costItem} closeCostDetail={closeCostDetail} fetchData={fetchData}/>}
             </div>
         )
     };

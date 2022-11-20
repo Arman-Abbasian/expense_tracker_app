@@ -1,7 +1,7 @@
-import { ToastContainer } from 'react-toastify';
 import styles from './App.module.css';
 import Balance from './container/Balance';
 import Layout from './layout/Layout';
+import  { Toaster } from 'react-hot-toast';
 
 
 
@@ -11,7 +11,7 @@ function App() {
   <div className='p-4 container mx-auto max-w-xl bg-slate-900 text-gray-200'>
     <Layout>
       <Balance />
-      <ToastContainer />
+      <Toaster />
     </Layout>
   </div>
   );

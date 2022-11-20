@@ -1,25 +1,60 @@
 {
   "expenses": [
     {
-      "name": "Arman",
-      "cost": "7000",
+      "name": "Arman Abbisian",
+      "cost": "8000",
       "type": "income",
       "date": "2022-11-09",
       "id": 8
     },
     {
       "name": "آرمان عباسیان",
-      "cost": "1400",
-      "type": "income",
+      "cost": "1200",
+      "type": "expense",
       "date": "2022-11-08",
       "id": 9
     },
     {
       "name": "food",
-      "cost": "2500",
-      "type": "expense",
+      "cost": "25000",
+      "type": "income",
       "date": "2022-11-10",
       "id": 10
+    },
+    {
+      "name": "sell",
+      "cost": "4500",
+      "type": "income",
+      "date": "2022-11-09",
+      "id": 11
+    },
+    {
+      "name": "income",
+      "cost": "2100",
+      "type": "income",
+      "date": "2022-11-20",
+      "id": 12
+    },
+    {
+      "name": "salman",
+      "cost": "2500",
+      "type": "expense",
+      "date": "2022-11-15",
+      "id": 13
+    },
+    {
+      "name": "Ali",
+      "cost": "2500",
+      "type": "expense",
+      "date": "2022-11-08",
+      "id": 14
+    },
+    {
+      "name": "food",
+      "cost": "1000",
+      "type": "expense",
+      "date": "2022-11-09",
+      "id": 15
     }
   ]
 }
