@@ -23,11 +23,11 @@ const Form = ({addOne}) => {
                 </div>
                 <div className="flex justify-center items-center gap-8 w-full">
                     <div className="flex justify-center items-center gap-1">
-                        <input type="radio" id="expense" name="expense" value="expense" onChange={changeHandler} checked={formValues.type==="expense"} />
+                        <input type="radio" id="expense" name="type" value="expense" onChange={changeHandler} checked={formValues.type==="expense"} />
                         <label htmlFor="expense">expense</label>
                     </div>
                     <div className="flex justify-center items-center gap-1">
-                        <input type="radio" id="income" name="expense" value="income" onChange={changeHandler} checked={formValues.type==="income"} />
+                        <input type="radio" id="income" name="type" value="income" onChange={changeHandler} checked={formValues.type==="income"} />
                         <label htmlFor="income">income</label>
                     </div>
                 </div>
