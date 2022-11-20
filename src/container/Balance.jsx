@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import CostDetail from "../components/CostDetail";
 import Costs from "../components/Costs";
 import  Form  from "../components/Form";
 import ShowTotalCosts from "../components/ShowTotalCosts";
@@ -11,7 +12,8 @@ import { costCalculate } from "../utils/costCalculate";
 const Balance = () => {
     const [balance,setBalance]=useState({balance:null,error:null,loading:false});
     const [expense,setExpense]=useState({income:0,expense:0});
-    const [showForm,setShowForm]=useState(false)
+    const [showForm,setShowForm]=useState(false);
+    const [costItem,setCostItem]=useState(null);
 
     const fetchData=()=>{
         setBalance({balance:null,error:null,loading:true})
@@ -33,12 +35,16 @@ const Balance = () => {
         .then(res=>fetchData(res.data))
         .catch(err=>toast.error(err.message))
     }
+    const showDetail=(id)=>{
+        const selectedItem=balance.balance.find(item=>item.id===id);
+        setCostItem(selectedItem);
+        console.log(costItem)
+    }
 
     const rendered=()=>{
         if(balance.loading) return <p>loading...</p>
         if(balance.error) return <p>{balance.error}</p>
         if(!balance.balance) return <p>no const existed</p>
-        console.log(balance.balance)
         return (
             <div className="container flex flex-col mx-auto gap-4 max-w-xs">
                 <div className="flex items-center justify-between">
@@ -47,7 +53,8 @@ const Balance = () => {
                 </div>
                 {showForm && <Form addOne={addOneConstHandler} className="transition-all duration-700" />}
                 <ShowTotalCosts expense={expense} />
-                <Costs balance={balance.balance} className="w-full" />
+                <Costs balance={balance.balance} showDetail={showDetail} className="w-full" />
+                {costItem && <CostDetail costItem={costItem} className="hidden"/>}
             </div>
         )
     };
