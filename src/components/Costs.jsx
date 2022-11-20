@@ -6,7 +6,7 @@ const Costs = ({balance}) => {
         <>
         <div className="flex flex-col justify-center items-center gap-4 w-full">
             {balance.map(item=>(
-                <Cost key={item.id} name={item.name} cost={item.cost} />
+                <Cost key={item.id} name={item.name} cost={item.cost} type={item.type} />
             ))}
         </div>
         </>

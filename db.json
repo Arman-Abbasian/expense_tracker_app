@@ -29,6 +29,32 @@
       "cost": "1500",
       "type": "income",
       "id": 5
+    },
+    {
+      "name": "purchase",
+      "cost": "2500",
+      "type": "expense",
+      "id": 6
+    },
+    {
+      "name": "sell",
+      "cost": "6500",
+      "type": "income",
+      "id": 7
+    },
+    {
+      "name": "Arman",
+      "cost": "7000",
+      "type": "income",
+      "date": "2022-11-09",
+      "id": 8
+    },
+    {
+      "name": "آرمان عباسیان",
+      "cost": "1400",
+      "type": "income",
+      "date": "2022-11-08",
+      "id": 9
     }
   ]
 }

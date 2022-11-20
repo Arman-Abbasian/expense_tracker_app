@@ -4,13 +4,14 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Costs from "../components/Costs";
 import  Form  from "../components/Form";
+import ShowTotalCosts from "../components/ShowTotalCosts";
 import { costCalculate } from "../utils/costCalculate";
 
 
 const Balance = () => {
-    const [loading,setLoading]=useState(true)
     const [balance,setBalance]=useState({balance:null,error:null,loading:false});
-    const [expense,setExpense]=useState({income:0,expense:0})
+    const [expense,setExpense]=useState({income:0,expense:0});
+    const [showForm,setShowForm]=useState(false)
 
     const fetchData=()=>{
         setBalance({balance:null,error:null,loading:true})
@@ -30,7 +31,7 @@ const Balance = () => {
     const addOneConstHandler=(formData)=>{
         axios.post(`http://localhost:4000/expenses`,formData)
         .then(res=>fetchData(res.data))
-        .catch(err=>toast.error(err))
+        .catch(err=>toast.error(err.message))
     }
 
     const rendered=()=>{
@@ -42,27 +43,14 @@ const Balance = () => {
             <div className="container flex flex-col mx-auto gap-4 max-w-xs">
                 <div className="flex items-center justify-between">
                     <p>Balance : {expense.income-expense.expense}$</p>
-                    <button className="w-10 h-5 rounded-sm bg-blue-500">Add</button>
+                    <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
                 </div>
-                <div>
-                    <div className="flex justify-between items-center">
-                        <div className="w-1/3 bg-gray-200 flex flex-col gap-2 items-center justify-center rounded-sm text-red-700">
-                            <p>Expense</p>
-                            <p>{expense.expense}$</p>
-                        </div>
-                        <div className="w-1/3 bg-gray-200 flex flex-col gap-2 items-center justify-center rounded-sm text-green-700">
-                            <p>Income</p>
-                            <p>{expense.income}$</p>
-                        </div>
-                    </div>
-                </div>
-                <Form addOne={addOneConstHandler} />
+                {showForm && <Form addOne={addOneConstHandler} className="transition-all duration-700" />}
+                <ShowTotalCosts expense={expense} />
                 <Costs balance={balance.balance} className="w-full" />
             </div>
         )
     };
-
-
     return ( 
         <div>{rendered()}</div>
      );
