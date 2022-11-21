@@ -34,11 +34,11 @@ const CostDetail = ({costItem,closeCostDetail,fetchData}) => {
     };
 
     return ( 
-        <div className="fixed z-20 top-10">
-            <div className="transition ease-in-out duration-1000 bg-red-400 p-6 relative ">
+        <div className="fixed w-screen h-screen z-20 top-0 left-0 bg-slate-400 bg-opacity-50 flex justify-center items-center">
+            <div className="transition ease-in-out duration-1000 bg-slate-900 p-6 relative backdrop-blur-xl rounded-md">
                 {costItem && 
                     <form className="flex flex-col gap-4 container mx-auto max-w-xs " onSubmit={submitHandler}>
-                        <AiOutlineClose onClick={closeHandler} className="absolute top-1 cursor-pointer right-1 z-10 text-black" />
+                        <AiOutlineClose onClick={closeHandler} className="absolute top-1 cursor-pointer right-1 z-10 text-gray-200" />
                         <div className=" relative">
                             <input className=" rounded-sm py-2 px-8 text-slate-900 w-full" type="text" name="name" value={formValues.name} onChange={changeHandler} placeholder="enter the name" />
                             <AiFillEdit className="absolute top-1/4 left-1 text-black" />

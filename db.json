@@ -1,20 +1,6 @@
 {
   "expenses": [
     {
-      "name": "Arman Abbisian",
-      "cost": "8000",
-      "type": "income",
-      "date": "2022-11-09",
-      "id": 8
-    },
-    {
-      "name": "آرمان عباسیان",
-      "cost": "1200",
-      "type": "expense",
-      "date": "2022-11-08",
-      "id": 9
-    },
-    {
       "name": "food",
       "cost": "25000",
       "type": "income",
@@ -30,31 +16,17 @@
     },
     {
       "name": "income",
-      "cost": "2100",
+      "cost": "21000",
       "type": "income",
-      "date": "2022-11-20",
+      "date": "2022-11-08",
       "id": 12
     },
     {
-      "name": "salman",
-      "cost": "2500",
-      "type": "expense",
-      "date": "2022-11-15",
-      "id": 13
-    },
-    {
-      "name": "Ali",
-      "cost": "2500",
-      "type": "expense",
-      "date": "2022-11-08",
-      "id": 14
-    },
-    {
       "name": "food",
-      "cost": "1000",
+      "cost": "2500",
       "type": "expense",
       "date": "2022-11-09",
-      "id": 15
+      "id": 13
     }
   ]
 }

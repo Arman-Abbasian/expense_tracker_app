@@ -37,7 +37,19 @@ const Balance = () => {
             toast.success("cost added successfully")
         })
         .catch(err=>toast.error(err.message))
-    }
+    };
+
+    const removeHandler=(e,id)=>{
+        e.stopPropagation();
+        console.log(e)
+        axios.delete(`http://localhost:4000/expenses/${id}`)
+        .then(res=>{
+            fetchData();
+            toast.success("cost deleted successfully")
+        })
+        .catch(err=>toast.error(err.message))
+    };
+
     const showDetail=(id)=>{
         const selectedItem=balance.balance.find(item=>item.id===id);
         setCostItem(selectedItem);
@@ -64,7 +76,7 @@ const Balance = () => {
                 </div>
                 {showForm && <Form addOne={addOneConstHandler} className="transition-all duration-700" />}
                 <ShowTotalCosts expense={expense} />
-                <Costs balance={balance.balance} showDetail={showDetail} className="w-full" />
+                <Costs balance={balance.balance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />
                 {costItem && <CostDetail costItem={costItem} closeCostDetail={closeCostDetail} fetchData={fetchData}/>}
             </div>
         )
