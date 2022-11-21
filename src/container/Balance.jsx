@@ -69,14 +69,14 @@ const Balance = () => {
         if(balance.error) return <p>{balance.error}</p>
         if(!balance.balance) return <p>no const existed</p>
         return (
-            <div className="container flex flex-col mx-auto gap-4 max-w-xs">
-                <div className="flex items-center justify-between">
-                    <p>Balance : {expense.income-expense.expense}$</p>
-                    <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
-                </div>
-                {showForm && <Form addOne={addOneConstHandler} className="transition-all duration-700" />}
-                <ShowTotalCosts expense={expense} />
-                <Costs balance={balance.balance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />
+                <div className="container flex flex-col mx-auto gap-4 max-w-xs">
+                    <div className="flex items-center justify-between">
+                        <p>Balance : {expense.income-expense.expense}$</p>
+                        <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
+                    </div>
+                {showForm && <Form addOne={addOneConstHandler} setShowForm={()=>setShowForm(false)} className="transition-all duration-700" />}
+                {!showForm &&<ShowTotalCosts expense={expense} />}
+                {!showForm &&<Costs balance={balance.balance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />}
                 {costItem && <CostDetail costItem={costItem} closeCostDetail={closeCostDetail} fetchData={fetchData}/>}
             </div>
         )

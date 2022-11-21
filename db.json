@@ -27,6 +27,13 @@
       "type": "expense",
       "date": "2022-11-09",
       "id": 13
+    },
+    {
+      "name": "IATF",
+      "cost": "2400",
+      "type": "expense",
+      "date": "2021-11-10",
+      "id": 14
     }
   ]
 }
