@@ -7,10 +7,13 @@ import Costs from "../components/Costs";
 import  Form  from "../components/Form";
 import ShowTotalCosts from "../components/ShowTotalCosts";
 import { costCalculate } from "../utils/costCalculate";
+import Filter from '../components/Filter';
+import { tolerance } from "../utils/costCalculate";
 
 
 const Balance = () => {
     const [balance,setBalance]=useState({balance:null,error:null,loading:false});
+    const [showBalance,setShowBalance]=useState(null);
     const [expense,setExpense]=useState({income:0,expense:0});
     const [showForm,setShowForm]=useState(false);
     const [costItem,setCostItem]=useState(null);
@@ -20,6 +23,7 @@ const Balance = () => {
         axios.get('http://localhost:4000/expenses')
         .then(res=>{
             setBalance({balance:res.data,error:null,loading:false});
+            setShowBalance(res.data);
            const data= costCalculate(res.data);
            setExpense({income:data.income,expense:data.expense})
         })
@@ -28,7 +32,10 @@ const Balance = () => {
         })
     };
 
-    useEffect(()=>{fetchData()},[]);
+    useEffect(()=>{
+        fetchData();
+       
+    },[]);
 
     const addOneConstHandler=(formData)=>{
         axios.post(`http://localhost:4000/expenses`,formData)
@@ -62,6 +69,9 @@ const Balance = () => {
     }
     const closeCostDetail=()=>{
         setCostItem(null);
+    };
+    const filterOptions=(options)=>{
+        console.log(options);
     }
 
     const rendered=()=>{
@@ -70,13 +80,14 @@ const Balance = () => {
         if(!balance.balance) return <p>no const existed</p>
         return (
                 <div className="container flex flex-col mx-auto gap-4 max-w-xs">
+                    <Filter filterOptions={filterOptions} balance={balance.balance}/>
                     <div className="flex items-center justify-between">
                         <p>Balance : {expense.income-expense.expense}$</p>
                         <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
                     </div>
                 {showForm && <Form addOne={addOneConstHandler} setShowForm={()=>setShowForm(false)} className="transition-all duration-700" />}
                 {!showForm &&<ShowTotalCosts expense={expense} />}
-                {!showForm &&<Costs balance={balance.balance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />}
+                {!showForm &&<Costs balance={showBalance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />}
                 {costItem && <CostDetail costItem={costItem} closeCostDetail={closeCostDetail} fetchData={fetchData}/>}
             </div>
         )

@@ -15,4 +15,18 @@ data.forEach(item => {
     }
 });
 return ({income,expense})
+};
+
+export const tolerance=(balance)=>{
+    const expense=balance.filter(item=>item.type==="expense");
+    const income=balance.filter(item=>item.type==="income"); 
+    const expenseArray=expense.map(item=>item.cost);
+    const incomeArray=income.map(item=>item.cost);
+
+    const maxExpense = Math.max(...expenseArray)
+    const minExpense = Math.min(...expenseArray)
+    const maxIncome = Math.max(...incomeArray)
+    const minIncome = Math.min(...incomeArray)
+    return {maxExpense,minExpense,maxIncome,minIncome};
+
 }
