@@ -9,6 +9,7 @@ import ShowTotalCosts from "../components/ShowTotalCosts";
 import { costCalculate } from "../utils/costCalculate";
 import Filter from '../components/Filter';
 import { tolerance } from "../utils/costCalculate";
+import { filterValue } from "../utils/filterValue";
 
 
 const Balance = () => {
@@ -17,6 +18,7 @@ const Balance = () => {
     const [expense,setExpense]=useState({income:0,expense:0});
     const [showForm,setShowForm]=useState(false);
     const [costItem,setCostItem]=useState(null);
+    const [filter,setFilter]=useState({name:"",costRange:0,kind:""});
 
     const fetchData=()=>{
         setBalance({balance:null,error:null,loading:true})
@@ -34,7 +36,6 @@ const Balance = () => {
 
     useEffect(()=>{
         fetchData();
-       
     },[]);
 
     const addOneConstHandler=(formData)=>{
@@ -70,8 +71,14 @@ const Balance = () => {
     const closeCostDetail=()=>{
         setCostItem(null);
     };
-    const filterOptions=(options)=>{
-        console.log(options);
+    const changeFilterHandler=(e)=>{
+        console.log(e.target)
+        setFilter({...filter,[e.target.name]:e.target.value});
+    };
+    const filterOption=(option)=>{
+        setFilter(option);
+        const conc=filterValue(showBalance,filter);
+        console.log(conc)
     }
 
     const rendered=()=>{
@@ -80,7 +87,7 @@ const Balance = () => {
         if(!balance.balance) return <p>no const existed</p>
         return (
                 <div className="container flex flex-col mx-auto gap-4 max-w-xs">
-                    <Filter filterOptions={filterOptions} balance={balance.balance}/>
+                    <Filter balance={balance.balance} filter={filter} changeFilterHandler={changeFilterHandler} setFilterOption={filterOption}/>
                     <div className="flex items-center justify-between">
                         <p>Balance : {expense.income-expense.expense}$</p>
                         <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
