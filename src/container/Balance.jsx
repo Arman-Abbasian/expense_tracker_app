@@ -39,7 +39,8 @@ const Balance = () => {
         fetchData();
     },[]);
 
-    const addOneConstHandler=(formData)=>{
+    const addOneCostHandler=(formData)=>{
+        console.log(formData)
         axios.post(`http://localhost:4000/expenses`,formData)
         .then(res=>{
             fetchData();
@@ -92,7 +93,7 @@ const Balance = () => {
                         <p>Balance : {expense.income-expense.expense}$</p>
                         <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
                     </div>
-                {showForm && <Form addOne={addOneConstHandler} setShowForm={()=>setShowForm(false)} className="transition-all duration-700" />}
+                {showForm && <Form addOne={addOneCostHandler} setShowForm={()=>setShowForm(false)} className="transition-all duration-700" />}
                 {!showForm &&<ShowTotalCosts expense={expense} />}
                 {!showForm &&<Costs balance={showBalance} showDetail={showDetail} removeHandler={(e,id)=>removeHandler(e,id)} className="w-full" />}
                 {costItem && <CostDetail costItem={costItem} closeCostDetail={closeCostDetail} fetchData={fetchData}/>}
