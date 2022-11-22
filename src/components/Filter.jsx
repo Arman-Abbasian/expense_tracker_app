@@ -30,16 +30,16 @@ const Filter = ({filterOptions,balance,filter,changeFilterHandler,setFilterOptio
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
                         <select name="kind" value={filter.kind} onChange={changeFilterHandler} className="text-black w-full rounded-sm">
-                            <option>All</option>
-                            <option>income</option>
-                            <option>expense</option>
+                            <option value="">All</option>
+                            <option value="income">income</option>
+                            <option value="expense">expense</option>
                         </select> 
                     </div>
 
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>item</label>
                         <select name="name" value={filter.name} onChange={changeFilterHandler} className="text-black w-full rounded-sm">
-                            <option vlaue="">All</option>
+                            <option value="">All</option>
                             {uniqueName.map(item=>{
                                 return <option key={item} value={item}>{item}</option>
                             })}

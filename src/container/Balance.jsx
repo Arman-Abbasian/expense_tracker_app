@@ -26,6 +26,7 @@ const Balance = () => {
         .then(res=>{
             setBalance({balance:res.data,error:null,loading:false});
             setShowBalance(res.data);
+            setShowBalance(filterValue(res.data,filter));
            const data= costCalculate(res.data);
            setExpense({income:data.income,expense:data.expense})
         })
@@ -77,8 +78,7 @@ const Balance = () => {
     };
     const filterOption=(option)=>{
         setFilter(option);
-        const conc=filterValue(showBalance,filter);
-        console.log(conc)
+        fetchData();
     }
 
     const rendered=()=>{
