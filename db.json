@@ -34,6 +34,20 @@
       "type": "expense",
       "date": "2022-11-16",
       "id": 16
+    },
+    {
+      "name": "daroo",
+      "cost": "1200",
+      "type": "expense",
+      "date": "2022-11-23",
+      "id": 17
+    },
+    {
+      "name": "income2",
+      "cost": "2100",
+      "type": "income",
+      "date": "2022-11-15",
+      "id": 18
     }
   ]
 }

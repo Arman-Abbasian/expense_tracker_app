@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { tolerance } from "../utils/costCalculate";
 import { uniqueOption } from "../utils/uniqueValue";
 
-const Filter = ({filterOptions,balance,filter,changeFilterHandler,setFilterOption,showFilterSection}) => {
+const Filter = ({balance,filter,changeFilterHandler,setFilterOption,showFilterSection,resetHandler}) => {
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
     
@@ -27,6 +27,7 @@ console.log(showFilterSection)
         <div className={showFilterSection ? "hidden" : "block"}>
             {balance && expenseTolerance && uniqueName &&
            <form onSubmit={submitHandler}>
+            <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button>
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
@@ -49,7 +50,7 @@ console.log(showFilterSection)
                 </div>
                 <div>
                     <label htmlFor="expense">expense range</label>
-                    <Slider defaultValue={expenseTolerance.minCost} value={filter.expenseRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={changeFilterHandler} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
+                    <Slider defaultValue={expenseTolerance.minCost} value={filter.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={changeFilterHandler} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
                 </div>
                 <input type="submit" value="apply filter" className="w-full p-2 bg-blue-500 rounded-sm cursor-pointer hover:bg-blue-400" />
            </form>
