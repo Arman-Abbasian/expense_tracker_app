@@ -8,7 +8,7 @@ import  { Toaster } from 'react-hot-toast';
 
 function App() {
  return(
-  <div className='p-4 container mx-auto max-w-xl bg-slate-900 text-gray-200'>
+  <div className='p-4 container mx-auto max-w-xl text-gray-200'>
     <Layout>
       <Balance />
       <Toaster />
