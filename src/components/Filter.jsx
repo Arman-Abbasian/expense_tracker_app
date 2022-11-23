@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { tolerance } from "../utils/costCalculate";
 import { uniqueOption } from "../utils/uniqueValue";
 
-const Filter = ({filterOptions,balance,filter,changeFilterHandler,setFilterOption}) => {
+const Filter = ({filterOptions,balance,filter,changeFilterHandler,setFilterOption,showFilterSection}) => {
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
     
@@ -21,9 +21,10 @@ const Filter = ({filterOptions,balance,filter,changeFilterHandler,setFilterOptio
         e.preventDefault();
         setFilterOption(filter)
 };
+console.log(showFilterSection)
  
     return ( 
-        <div>
+        <div className={showFilterSection ? "hidden" : "block"}>
             {balance && expenseTolerance && uniqueName &&
            <form onSubmit={submitHandler}>
                 <div className="flex justify-between items-center gap-4">

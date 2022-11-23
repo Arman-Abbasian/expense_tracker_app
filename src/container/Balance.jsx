@@ -19,6 +19,7 @@ const Balance = () => {
     const [showForm,setShowForm]=useState(false);
     const [costItem,setCostItem]=useState(null);
     const [filter,setFilter]=useState({name:"",costRange:0,kind:""});
+    const [showFilterSection,setShowFilterSection]=useState(true)
 
     const fetchData=()=>{
         setBalance({balance:null,error:null,loading:true})
@@ -88,7 +89,8 @@ const Balance = () => {
         if(!balance.balance) return <p>no const existed</p>
         return (
                 <div className="container flex flex-col mx-auto gap-4 max-w-xs">
-                    <Filter balance={balance.balance} filter={filter} changeFilterHandler={changeFilterHandler} setFilterOption={filterOption}/>
+                    <button onClick={()=>setShowFilterSection(!showFilterSection)} className="w-full p-2 bg-blue-500 rounded-sm">{showFilterSection?  "show Filter section" :"hide Filter section"}</button>
+                    <Filter  balance={balance.balance} filter={filter} changeFilterHandler={changeFilterHandler} setFilterOption={filterOption} showFilterSection={showFilterSection}/>
                     <div className="flex items-center justify-between">
                         <p>Balance : {expense.income-expense.expense}$</p>
                         <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
