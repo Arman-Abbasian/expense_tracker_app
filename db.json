@@ -29,13 +29,6 @@
       "id": 15
     },
     {
-      "name": "food3",
-      "cost": "2000",
-      "type": "expense",
-      "date": "2022-11-16",
-      "id": 16
-    },
-    {
       "name": "daroo",
       "cost": "1200",
       "type": "expense",

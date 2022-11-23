@@ -8,5 +8,4 @@ const CostContext = ({name,cost,type,showDetail,onDelete}) => {
         </div>
      );
 }
- 
 export default CostContext;
