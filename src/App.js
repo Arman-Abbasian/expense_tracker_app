@@ -8,6 +8,7 @@ import CostProvider from './Providers/CostProvider';
 import CostContext from './components/useContext/CostContext';
 import CostsContext from './components/useContext/CostsContext';
 import FormContext from './components/useContext/FormContext';
+import ShowTotalCostsContext from './components/useContext/ShowTotalCostsContext';
 
 
 
@@ -17,12 +18,15 @@ function App() {
     {/* <Layout>
       <Balance />
     </Layout> */}
+
     <Layout>
-      <FormContext />
       <CostProvider>
+        <ShowTotalCostsContext />
+        <FormContext />
         <CostsContext />
       </CostProvider>
     </Layout>
+
     <Toaster />
   </div>
   );

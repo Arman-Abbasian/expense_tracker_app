@@ -3,18 +3,27 @@ import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { toast } from "react-hot-toast";
+import { filterValue } from "../utils/filterValue";
 
 const CostContext=createContext();
 const CostContextDispatcher=createContext();
+const FilterContext=createContext();
+const FilterContextDispatcher=createContext();
+
 
 
 const CostProvider = ({children}) => {
     const [costs,setCosts]=useState({cost:[],loading:false,error:null});
+    const [filter,setFilter]=useState({name:"",costRange:0,kind:""});
     return ( 
         <div className="p-4">
             <CostContext.Provider value={costs}>
                 <CostContextDispatcher.Provider value={setCosts}>
-                     {children}
+                    <FilterContext.Provider value={filter}>
+                        <FilterContextDispatcher.Provider value={setFilter}>
+                            {children}
+                        </FilterContextDispatcher.Provider>
+                    </FilterContext.Provider>
                 </CostContextDispatcher.Provider>
             </CostContext.Provider>
         </div>
@@ -23,15 +32,20 @@ const CostProvider = ({children}) => {
  
 export default CostProvider;
 export const useCosts=()=>useContext(CostContext);
+export const useFilters=()=>useContext(FilterContext)
 export const useCostActions=()=>{
     const costs=useCosts();
+    const filter=useFilters();
     const setCosts=useContext(CostContextDispatcher);
 
     //get data
     const initialLoading=()=>{
         setCosts({cost:[],loading:true,error:null})
         axios.get(`http://localhost:4000/expenses`)
-        .then(res=>setCosts({cost:res.data,loading:false,error:null}))
+        .then(res=>{
+            filterValue(res.data,filter)
+            setCosts({cost:res.data,loading:false,error:null});
+        })
         .catch(err=>setCosts({cost:[],loading:false,error:err.message}));
     };
     //add one comment
@@ -51,14 +65,18 @@ export const useCostActions=()=>{
             initialLoading();
         })
         .catch(err=>toast.error(err.message));
-    };
-    // const showDetail=(payload)=>{
-    //     axios.get(`http://localhost:4000/expenses/${payload}`)
-    //     .then(res=>{
-    //       return (res.data)
-    //     })
-    //     .catch(err=>toast.error(err.message));
-    // };          
+    };        
         
         return {initialLoading,deleteOneCost,addOneCost};
     };
+
+export const useFilterActions=()=>{
+    const filter=useFilters();
+    const setFilter=useContext(FilterContextDispatcher);
+
+    //change Data
+    const filterCosts=()=>{
+       filterValue()
+    };
+    return {filterCosts};
+};

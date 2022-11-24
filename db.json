@@ -37,10 +37,10 @@
     },
     {
       "name": "Ali",
-      "cost": 0,
-      "type": "",
-      "date": "",
-      "id": 18
+      "cost": "7400",
+      "type": "expense",
+      "date": "2022-11-08",
+      "id": 19
     }
   ]
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar } from "react-icons/ai";
 import { useCostActions } from "../../Providers/CostProvider";
 
-const FormContext = () => {
+const FormContext = ({showForm}) => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:"",date:""});
     const {addOneCost}=useCostActions();
     const changeHandler=(e)=>{
@@ -14,7 +14,7 @@ const FormContext = () => {
         setFormValues({name:"",cost:0,type:"",date:""});
     }
     return ( 
-        <div className="transition ease-in-out duration-1000">
+        <div className={`transition ease-in-out duration-1000 ${showForm? "block":"hidden"}`}>
             <form className="flex flex-col gap-4 container mx-auto max-w-xs" onSubmit={submitHandler}>
                 <div className=" relative">
                     <input className=" rounded-sm py-2 px-8 text-slate-900 w-full" type="text" name="name" value={formValues.name} onChange={changeHandler} placeholder="enter the name" />
