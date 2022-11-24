@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar } from "react-icons/ai";
+import { useCostActions } from "../../Providers/CostProvider";
 
-const FormContext = ({addOne,setShowForm}) => {
+const FormContext = () => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:"",date:""});
+    const {addOneCost}=useCostActions();
     const changeHandler=(e)=>{
         setFormValues({...formValues,[e.target.name]:e.target.value});
     }
     const submitHandler=(e)=>{
         e.preventDefault();
-        addOne(formValues);
-        setShowForm();
+        addOneCost(formValues);
+        setFormValues({name:"",cost:0,type:"",date:""});
     }
     return ( 
         <div className="transition ease-in-out duration-1000">

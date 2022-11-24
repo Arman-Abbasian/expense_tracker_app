@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const CostContext=createContext();
 const CostContextDispatcher=createContext();
@@ -34,17 +34,17 @@ export const useCostActions=()=>{
         .then(res=>setCosts({cost:res.data,loading:false,error:null}))
         .catch(err=>setCosts({cost:[],loading:false,error:err.message}));
     };
-    // //add one comment
-    // const addOneComment=(payload)=>{
-    //         axios.post(`http://localhost:4000/comments`,payload)
-    //         .then(res=>{
-    //             initialLoading();
-    //             toast.success("new data added successfully")
-    //         })
-    //         .catch(err=>toast.error(err.message));
-    //     };
+    //add one comment
+    const addOneCost=(payload)=>{
+            axios.post(`http://localhost:4000/expenses`, payload)
+            .then(res=>{
+                toast.success("new data added successfully");
+                initialLoading();
+            })
+            .catch(err=>toast.error(err.message));
+        };
         //delete one comment
-    const deleteOneComment=(payload)=>{
+    const deleteOneCost=(payload)=>{
         axios.delete(`http://localhost:4000/expenses/${payload}`)
         .then(res=>{
             toast.success("cost deleted successfully");
@@ -52,13 +52,13 @@ export const useCostActions=()=>{
         })
         .catch(err=>toast.error(err.message));
     };
-    const showDetail=(payload)=>{
-        axios.get(`http://localhost:4000/expenses/${payload}`)
-        .then(res=>{
-          return (res.data)
-        })
-        .catch(err=>toast.error(err.message));
-    };          
+    // const showDetail=(payload)=>{
+    //     axios.get(`http://localhost:4000/expenses/${payload}`)
+    //     .then(res=>{
+    //       return (res.data)
+    //     })
+    //     .catch(err=>toast.error(err.message));
+    // };          
         
-        return {initialLoading,deleteOneComment,showDetail};
+        return {initialLoading,deleteOneCost,addOneCost};
     };

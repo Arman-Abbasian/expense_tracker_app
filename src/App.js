@@ -7,6 +7,7 @@ import  { Toaster } from 'react-hot-toast';
 import CostProvider from './Providers/CostProvider';
 import CostContext from './components/useContext/CostContext';
 import CostsContext from './components/useContext/CostsContext';
+import FormContext from './components/useContext/FormContext';
 
 
 
@@ -15,14 +16,14 @@ function App() {
   <div className='p-4 container mx-auto max-w-xl text-gray-200'>
     {/* <Layout>
       <Balance />
-      <Toaster />
     </Layout> */}
     <Layout>
+      <FormContext />
       <CostProvider>
-        <CostContext />
         <CostsContext />
       </CostProvider>
     </Layout>
+    <Toaster />
   </div>
   );
 }

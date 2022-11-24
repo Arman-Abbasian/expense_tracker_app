@@ -36,10 +36,10 @@
       "id": 17
     },
     {
-      "name": "income2",
-      "cost": "2100",
-      "type": "income",
-      "date": "2022-11-15",
+      "name": "Ali",
+      "cost": 0,
+      "type": "",
+      "date": "",
       "id": 18
     }
   ]
