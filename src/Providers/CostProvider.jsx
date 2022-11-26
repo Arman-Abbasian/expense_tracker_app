@@ -42,7 +42,8 @@ export const useCostActions=()=>{
         axios.get(`http://localhost:4000/expenses`)
         .then(res=>{
             setAllCosts({...allcosts,costs:{cost:res.data,loading:false,error:null}});
-            filterValue(res.data,allcosts.filters);
+            const filteredValues=filterValue(res.data,allcosts.filters);
+            setAllCosts({...allcosts,costs:{cost:filteredValues,loading:false,error:null}});
             const data= costCalculate(res.data);
         })
         .catch(err=>setAllCosts({...allcosts,costs:{cost:[],loading:false,error:err.message}}));
@@ -68,7 +69,8 @@ export const useCostActions=()=>{
     
     //change filter state
    const changeFilterState=(payload)=>{
-    setAllCosts({...allcosts,filters:{[payload.target.name]:payload.target.value}});
+    setAllCosts({...allcosts,filters:{...allcosts.filters,[payload.target.name]:payload.target.value}});
+    console.log(allcosts.filters)
 };
         
         return {initialLoading,deleteOneCost,addOneCost,changeFilterState};

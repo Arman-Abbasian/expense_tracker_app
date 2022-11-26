@@ -9,6 +9,7 @@ import CostContext from './components/useContext/CostContext';
 import CostsContext from './components/useContext/CostsContext';
 import FormContext from './components/useContext/FormContext';
 import ShowTotalCostsContext from './components/useContext/ShowTotalCostsContext';
+import FilterContext from './components/useContext/FilterContext';
 
 
 
@@ -23,7 +24,7 @@ function App() {
     <Layout>
       <CostProvider>
         <ShowTotalCostsContext />
-        {/* <FilterContext /> */}
+        <FilterContext />
         <FormContext />
         <CostsContext />
       </CostProvider>

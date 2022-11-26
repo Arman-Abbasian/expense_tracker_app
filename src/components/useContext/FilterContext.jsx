@@ -1,43 +1,39 @@
 import { Slider } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useCosts, useFilterActions, useFilters } from "../../Providers/CostProvider";
+import { useCostActions, useCosts } from "../../Providers/CostProvider";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
 const FilterContext = () => {
-    const costs=useCosts();
-    const filter=useFilters();
-    const {changeFilterState, filterCosts}=useFilterActions();
+    const allcosts=useCosts();
+    const {initialLoading,changeFilterState}=useCostActions();
+
+
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
     
     useEffect(()=>{
-        const cal= tolerance(costs.cost);
-        console.log(cal);
-        const unique=uniqueOption(costs.cost);
-        console.log(unique)
+        //get the tolerance of your costs
+        const cal= tolerance(allcosts.costs.cost);
+        //get the uniaue items of your costs
+        const unique=uniqueOption(allcosts.costs.cost);
         setUniqueName(unique)
         setExpenseTolerance(cal);
-     },[]);
+     },[allcosts]);
 
-    const changeFilterHandler=(e)=>{
-        changeFilterState(e);
-        
-    };
     const submitHandler=(e)=>{
         e.preventDefault();
-        filterCosts();
+        initialLoading();
 };
- 
     return ( 
         <div >
-            {costs.cost && expenseTolerance && uniqueName &&
+            {allcosts.costs.cost.length>0 && expenseTolerance && uniqueName.length>0 &&
            <form onSubmit={submitHandler}>
             {/* <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button> */}
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
-                        <select name="kind" value={filter.kind} onChange={changeFilterHandler} className="text-black w-full rounded-sm">
+                        <select name="kind" value={allcosts.filters.kind} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             <option value="income">income</option>
                             <option value="expense">expense</option>
@@ -46,7 +42,7 @@ const FilterContext = () => {
 
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>item</label>
-                        <select name="name" value={filter.name} onChange={changeFilterHandler} className="text-black w-full rounded-sm">
+                        <select name="name" value={allcosts.filters.name} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             {uniqueName.map(item=>{
                                 return <option key={item} value={item}>{item}</option>
@@ -56,11 +52,11 @@ const FilterContext = () => {
                 </div>
                 <div>
                     <label htmlFor="expense">expense range</label>
-                    <Slider defaultValue={expenseTolerance.minCost} value={filter.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={changeFilterHandler} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
+                    <Slider defaultValue={expenseTolerance.minCost} value={allcosts.filters.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={(e)=>changeFilterState(e)} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
                 </div>
                 <input type="submit" value="apply filter" className="w-full p-2 bg-blue-500 rounded-sm cursor-pointer hover:bg-blue-400" />
            </form>
-           }
+}
         </div>
      );
 }
