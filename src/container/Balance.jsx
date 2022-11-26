@@ -26,11 +26,9 @@ const Balance = () => {
         axios.get('http://localhost:4000/expenses')
         .then(res=>{
             setBalance({balance:res.data,error:null,loading:false});
-            setShowBalance(res.data);
-            console.log(filter)
             setShowBalance(filterValue(res.data,filter));
-           const data= costCalculate(res.data);
-           setExpense({income:data.income,expense:data.expense})
+            const data= costCalculate(res.data);
+            setExpense({income:data.income,expense:data.expense})
         })
         .catch(err=>{
             setBalance({balance:null,error:err.message,loading:false})

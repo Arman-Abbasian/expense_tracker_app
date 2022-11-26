@@ -1,39 +1,39 @@
 import { Slider } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useCosts } from "../../Providers/CostProvider";
-import { tolerance } from "../utils/costCalculate";
-import { uniqueOption } from "../utils/uniqueValue";
+import { useCosts, useFilterActions, useFilters } from "../../Providers/CostProvider";
+import { tolerance } from "../../utils/costCalculate";
+import { uniqueOption } from "../../utils/uniqueValue";
 
-const FilterContext = ({changeFilterHandler,setFilterOption,showFilterSection,resetHandler}) => {
+const FilterContext = () => {
     const costs=useCosts();
-    const [filter,setFilter]=useState({name:"",costRange:0,kind:""});
+    const filter=useFilters();
+    const {changeFilterState, filterCosts}=useFilterActions();
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
     
     useEffect(()=>{
         const cal= tolerance(costs.cost);
         console.log(cal);
-    const unique=uniqueOption(costs.cost);
-    console.log(unique)
-    setUniqueName(unique)
+        const unique=uniqueOption(costs.cost);
+        console.log(unique)
+        setUniqueName(unique)
         setExpenseTolerance(cal);
      },[]);
 
     const changeFilterHandler=(e)=>{
-        console.log(e.target)
-        setFilter({...filter,[e.target.name]:e.target.value});
+        changeFilterState(e);
+        
     };
     const submitHandler=(e)=>{
         e.preventDefault();
-        setFilterOption(filter)
+        filterCosts();
 };
-console.log(showFilterSection)
  
     return ( 
-        <div className={showFilterSection ? "hidden" : "block"}>
+        <div >
             {costs.cost && expenseTolerance && uniqueName &&
            <form onSubmit={submitHandler}>
-            <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button>
+            {/* <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button> */}
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { toast } from "react-hot-toast";
+import { costCalculate } from "../utils/costCalculate";
 import { filterValue } from "../utils/filterValue";
 
 const CostContext=createContext();
@@ -43,8 +44,9 @@ export const useCostActions=()=>{
         setCosts({cost:[],loading:true,error:null})
         axios.get(`http://localhost:4000/expenses`)
         .then(res=>{
-            filterValue(res.data,filter)
             setCosts({cost:res.data,loading:false,error:null});
+            filterValue(res.data,filter);
+            const data= costCalculate(res.data);
         })
         .catch(err=>setCosts({cost:[],loading:false,error:err.message}));
     };
@@ -74,9 +76,12 @@ export const useFilterActions=()=>{
     const filter=useFilters();
     const setFilter=useContext(FilterContextDispatcher);
 
-    //change Data
+   //change filter state
+   const changeFilterState=(payload)=>{
+    setFilter({...filter,[payload.target.name]:payload.target.value});
+};
     const filterCosts=()=>{
-       filterValue()
-    };
-    return {filterCosts};
+        filterValue()
+}
+return {changeFilterState, filterCosts};
 };
