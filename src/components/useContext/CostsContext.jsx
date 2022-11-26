@@ -8,7 +8,7 @@ import CostContext from "./CostContext";
 
 const CostsContext = ({}) => {
     const [selectedItem,setSelectedItem]=useState(null)
-    const costs=useCosts();
+    const allcosts=useCosts();
     const {initialLoading,deleteOneCost}=useCostActions();
 
     useEffect(()=>{initialLoading()},[]);
@@ -18,13 +18,13 @@ const CostsContext = ({}) => {
     }
 
     const rendered=()=>{
-        costs.loading &&  <p>loading...</p>
-        costs.error &&  <p>{costs.error.message}</p>
-        !costs.cost && <p>no cost added</p>
+        allcosts.costs.loading &&  <p>loading...</p>
+        allcosts.costs.error &&  <p>{allcosts.costs.error.message}</p>
+        !allcosts.costs.cost && <p>no cost added</p>
         return (
             <div className="flex flex-col justify-center items-center gap-4 w-full">
             
-            {costs.cost.map(item=>(
+            {allcosts.costs.cost.map(item=>(
                 <CostContext key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={()=>deleteOneCost(item.id)} showDetail={()=>showItemDetail(item.id)} />
             ))}
         </div>

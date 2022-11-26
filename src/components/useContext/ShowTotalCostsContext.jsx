@@ -3,7 +3,7 @@ import { useCosts } from "../../Providers/CostProvider";
 import FormContext from "./FormContext";
 
 const ShowTotalCostsContext = () => {
-    const costs=useCosts();
+    const allcosts=useCosts();
     const [totalExpenses,setTotalExpenses]=useState(0);
     const [totalIncomes,setTotalIncomes]=useState(0);
     const [showForm,setShowForm]=useState(false)
@@ -11,7 +11,7 @@ const ShowTotalCostsContext = () => {
     useEffect(()=>{
         let income=0;
         let expense=0;
-        costs.cost.forEach(item => {
+        allcosts.costs.cost.forEach(item => {
             if(item.type==="expense"){
                 expense+=parseFloat(item.cost)
             }
@@ -21,7 +21,7 @@ const ShowTotalCostsContext = () => {
         });
         setTotalExpenses(expense);
         setTotalIncomes(income);
-    },[costs])
+    },[allcosts.costs])
 
     return ( 
         <div>

@@ -14,17 +14,15 @@ const FilterContextDispatcher=createContext();
 
 
 const CostProvider = ({children}) => {
-    const [costs,setCosts]=useState({cost:[],loading:false,error:null});
-    const [filter,setFilter]=useState({name:"",costRange:0,kind:""});
+    const [allcosts,setAllCosts]=useState({
+        costs:{cost:[],loading:false,error:null},
+        filters:{name:"",costRange:0,kind:""}
+    });
     return ( 
         <div className="p-4">
-            <CostContext.Provider value={costs}>
-                <CostContextDispatcher.Provider value={setCosts}>
-                    <FilterContext.Provider value={filter}>
-                        <FilterContextDispatcher.Provider value={setFilter}>
-                            {children}
-                        </FilterContextDispatcher.Provider>
-                    </FilterContext.Provider>
+            <CostContext.Provider value={allcosts}>
+                <CostContextDispatcher.Provider value={setAllCosts}>
+                    {children}
                 </CostContextDispatcher.Provider>
             </CostContext.Provider>
         </div>
@@ -35,20 +33,19 @@ export default CostProvider;
 export const useCosts=()=>useContext(CostContext);
 export const useFilters=()=>useContext(FilterContext)
 export const useCostActions=()=>{
-    const costs=useCosts();
-    const filter=useFilters();
-    const setCosts=useContext(CostContextDispatcher);
+    const allcosts=useCosts();
+    const setAllCosts=useContext(CostContextDispatcher);
 
     //get data
     const initialLoading=()=>{
-        setCosts({cost:[],loading:true,error:null})
+        setAllCosts({...allcosts,costs:{cost:[],loading:true,error:null}})
         axios.get(`http://localhost:4000/expenses`)
         .then(res=>{
-            setCosts({cost:res.data,loading:false,error:null});
-            filterValue(res.data,filter);
+            setAllCosts({...allcosts,costs:{cost:res.data,loading:false,error:null}});
+            filterValue(res.data,allcosts.filters);
             const data= costCalculate(res.data);
         })
-        .catch(err=>setCosts({cost:[],loading:false,error:err.message}));
+        .catch(err=>setAllCosts({...allcosts,costs:{cost:[],loading:false,error:err.message}}));
     };
     //add one comment
     const addOneCost=(payload)=>{
@@ -67,21 +64,13 @@ export const useCostActions=()=>{
             initialLoading();
         })
         .catch(err=>toast.error(err.message));
-    };        
+    };   
+    
+    //change filter state
+   const changeFilterState=(payload)=>{
+    setAllCosts({...allcosts,filters:{[payload.target.name]:payload.target.value}});
+};
         
-        return {initialLoading,deleteOneCost,addOneCost};
+        return {initialLoading,deleteOneCost,addOneCost,changeFilterState};
     };
 
-export const useFilterActions=()=>{
-    const filter=useFilters();
-    const setFilter=useContext(FilterContextDispatcher);
-
-   //change filter state
-   const changeFilterState=(payload)=>{
-    setFilter({...filter,[payload.target.name]:payload.target.value});
-};
-    const filterCosts=()=>{
-        filterValue()
-}
-return {changeFilterState, filterCosts};
-};
