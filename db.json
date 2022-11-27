@@ -18,7 +18,7 @@
       "name": "food",
       "cost": "2500",
       "type": "expense",
-      "date": "2022-11-09",
+      "date": "2022-11-01",
       "id": 13
     },
     {
@@ -34,13 +34,6 @@
       "type": "expense",
       "date": "2022-11-27",
       "id": 18
-    },
-    {
-      "name": "daroo",
-      "cost": "1200",
-      "type": "expense",
-      "date": "2022-11-07",
-      "id": 19
     }
   ]
 }

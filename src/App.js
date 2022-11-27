@@ -10,6 +10,7 @@ import CostsContext from './components/useContext/CostsContext';
 import FormContext from './components/useContext/FormContext';
 import ShowTotalCostsContext from './components/useContext/ShowTotalCostsContext';
 import FilterContext from './components/useContext/FilterContext';
+import CostDetailContext from './components/useContext/CostDetailContext';
 
 
 
