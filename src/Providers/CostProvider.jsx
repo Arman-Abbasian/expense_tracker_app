@@ -8,9 +8,6 @@ import { filterValue } from "../utils/filterValue";
 
 const CostContext=createContext();
 const CostContextDispatcher=createContext();
-const FilterContext=createContext();
-const FilterContextDispatcher=createContext();
-
 
 
 const CostProvider = ({children}) => {
@@ -27,27 +24,27 @@ const CostProvider = ({children}) => {
             </CostContext.Provider>
         </div>
      );
-}
+};
  
 export default CostProvider;
 export const useCosts=()=>useContext(CostContext);
-export const useFilters=()=>useContext(FilterContext)
 export const useCostActions=()=>{
     const allcosts=useCosts();
     const setAllCosts=useContext(CostContextDispatcher);
 
     //get data
     const initialLoading=()=>{
-        setAllCosts({...allcosts,costs:{cost:[],loading:true,error:null}})
+        setAllCosts({...allcosts,costs:{cost:[],loading:true,error:null}});
         axios.get(`http://localhost:4000/expenses`)
         .then(res=>{
             setAllCosts({...allcosts,costs:{cost:res.data,loading:false,error:null}});
             const filteredValues=filterValue(res.data,allcosts.filters);
             setAllCosts({...allcosts,costs:{cost:filteredValues,loading:false,error:null}});
-            const data= costCalculate(res.data);
+            const data= costCalculate(allcosts.costs.cost);
         })
         .catch(err=>setAllCosts({...allcosts,costs:{cost:[],loading:false,error:err.message}}));
     };
+   
     //add one comment
     const addOneCost=(payload)=>{
             axios.post(`http://localhost:4000/expenses`, payload)
@@ -65,7 +62,10 @@ export const useCostActions=()=>{
             initialLoading();
         })
         .catch(err=>toast.error(err.message));
-    };   
+    };
+    const resetFilters=()=>{
+        setAllCosts({...allcosts,filters:{name:"",costRange:0,kind:""}});
+    }   
     
     //change filter state
    const changeFilterState=(payload)=>{
@@ -73,6 +73,6 @@ export const useCostActions=()=>{
     console.log(allcosts.filters)
 };
         
-        return {initialLoading,deleteOneCost,addOneCost,changeFilterState};
+        return {initialLoading,deleteOneCost,addOneCost,changeFilterState,resetFilters};
     };
 

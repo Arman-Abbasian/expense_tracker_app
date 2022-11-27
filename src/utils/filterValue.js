@@ -1,17 +1,23 @@
 export const filterValue=(balance,filters)=>{
-    console.log(balance);
-    console.log(filters)
-    const fiterKind=balance.filter(item=>item.type.includes(filters.kind));
-    console.log(fiterKind);
-    const filterName=fiterKind.filter(item=>item.name.includes(filters.name));
-    console.log(filterName);
+    let filterKind=[];
+    let filterName=[];
+
+    if (filters.kind===''){
+        filterKind=balance;
+    }else{
+        filterKind=balance.filter(item=>item.type===(filters.kind));
+    }
+    if (filters.name===''){
+        filterName=filterKind;
+    }else{
+        filterName=filterKind.filter(item=>item.name===filters.name);
+    }
     let filterCostRange=filterName;
     filters.costRange===0 ?  
     filterCostRange=filterName.filter(item=>parseFloat(item.cost)>=filters.costRange)
-    : 
+    :
     filterCostRange=filterName.filter(item=>parseFloat(item.cost)<=filters.costRange);  
-        console.log(filterCostRange)
         return filterCostRange;
-    }
+    };
 
 

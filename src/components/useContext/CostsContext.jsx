@@ -12,11 +12,9 @@ const CostsContext = ({}) => {
     const {initialLoading,deleteOneCost}=useCostActions();
 
     useEffect(()=>{initialLoading()},[]);
-
     const showItemDetail=(id)=>{
         setSelectedItem(id)
     }
-
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
         allcosts.costs.error &&  <p>{allcosts.costs.error.message}</p>

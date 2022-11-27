@@ -6,7 +6,7 @@ import { uniqueOption } from "../../utils/uniqueValue";
 
 const FilterContext = () => {
     const allcosts=useCosts();
-    const {initialLoading,changeFilterState}=useCostActions();
+    const {initialLoading,changeFilterState,resetFilters}=useCostActions();
 
 
     const [expenseTolerance,setExpenseTolerance]=useState(null);
@@ -20,16 +20,21 @@ const FilterContext = () => {
         setUniqueName(unique)
         setExpenseTolerance(cal);
      },[allcosts]);
+     const resetHandler=()=>{
+        resetFilters();
+        initialLoading();
+     }
 
     const submitHandler=(e)=>{
         e.preventDefault();
         initialLoading();
+       
 };
     return ( 
-        <div >
-            {allcosts.costs.cost.length>0 && expenseTolerance && uniqueName.length>0 &&
+        <div>
+            {allcosts.costs.cost &&
            <form onSubmit={submitHandler}>
-            {/* <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button> */}
+            <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button>
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
@@ -50,10 +55,12 @@ const FilterContext = () => {
                         </select>
                     </div>
                 </div>
+                {expenseTolerance && 
                 <div>
-                    <label htmlFor="expense">expense range</label>
+                    <label htmlFor="expense">expense range</label>  
                     <Slider defaultValue={expenseTolerance.minCost} value={allcosts.filters.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={(e)=>changeFilterState(e)} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
                 </div>
+            }
                 <input type="submit" value="apply filter" className="w-full p-2 bg-blue-500 rounded-sm cursor-pointer hover:bg-blue-400" />
            </form>
 }
