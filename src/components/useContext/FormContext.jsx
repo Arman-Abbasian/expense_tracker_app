@@ -38,7 +38,7 @@ const FormContext = ({showForm}) => {
                     <input className=" rounded-sm py-2 px-8 text-slate-900 w-full" type="date" name="date" value={formValues.date} onChange={changeHandler} placeholder="enter the cost" />
                     <AiOutlineCalendar className="absolute top-1/4 left-1 text-black" />
                 </div>
-                <input type="submit" value="Add"   className="bg-blue-500 p-2 rounded-sm cursor-pointer" />
+                <input type="submit" value="Add"   className="bg-blue-500 p-2 rounded-sm cursor-pointer mb-10" />
             </form>
         </div>
      );

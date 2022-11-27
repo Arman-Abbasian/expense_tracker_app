@@ -16,7 +16,7 @@ const CostProvider = ({children}) => {
         filters:{name:"",costRange:0,kind:""}
     });
     return ( 
-        <div className="p-4">
+        <div>
             <CostContext.Provider value={allcosts}>
                 <CostContextDispatcher.Provider value={setAllCosts}>
                     {children}

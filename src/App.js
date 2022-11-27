@@ -16,7 +16,7 @@ import FilterContext from './components/useContext/FilterContext';
 
 function App() {
  return(
-  <div className='p-4 container mx-auto max-w-xl text-gray-200'>
+  <div className='p-4 container mx-auto max-w-2xl text-gray-200'>
     {/* <Layout>
       <Balance />
     </Layout> */}

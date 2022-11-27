@@ -26,7 +26,7 @@ const ShowTotalCostsContext = () => {
     return ( 
         <div className="mb-10">
             <div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-8">
                     <p>Balance : {totalIncomes-totalExpenses}$</p>
                     <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>
                 </div>
