@@ -11,6 +11,7 @@ const FilterContext = () => {
 
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
+    const [showFilterSection,setShowFilterSection]=useState(false)
     
     useEffect(()=>{
         //get the tolerance of your costs
@@ -20,9 +21,9 @@ const FilterContext = () => {
         setUniqueName(unique)
         setExpenseTolerance(cal);
      },[allcosts]);
+
      const resetHandler=()=>{
         resetFilters();
-        initialLoading();
      }
 
     const submitHandler=(e)=>{
@@ -31,8 +32,9 @@ const FilterContext = () => {
        
 };
     return ( 
-        <div>
-            {allcosts.costs.cost &&
+        <div className="mb-8">
+            <button onClick={()=>setShowFilterSection(!showFilterSection)} className="w-full p-2 bg-blue-500 rounded-sm mb-2">{showFilterSection?  "hide Filter section" :"show Filter section"}</button>
+            {allcosts.costs.cost && showFilterSection &&
            <form onSubmit={submitHandler}>
             <button onClick={resetHandler} className="w-1/3 p-2 mb-2 rounded-sm bg-blue-500">Reset</button>
                 <div className="flex justify-between items-center gap-4">

@@ -6,7 +6,7 @@ const ShowTotalCostsContext = () => {
     const allcosts=useCosts();
     const [totalExpenses,setTotalExpenses]=useState(0);
     const [totalIncomes,setTotalIncomes]=useState(0);
-    const [showForm,setShowForm]=useState(false)
+    const [showForm,setShowForm]=useState(false);
 
     useEffect(()=>{
         let income=0;
@@ -24,10 +24,8 @@ const ShowTotalCostsContext = () => {
     },[allcosts.costs])
 
     return ( 
-        <div>
+        <div className="mb-10">
             <div>
-                {/* <button onClick={()=>setShowFilterSection(!showFilterSection)} className="w-full p-2 bg-blue-500 rounded-sm">{showFilterSection?  "show Filter section" :"hide Filter section"}</button>
-                    <Filter resetHandler={resetHandler}  balance={balance.balance} filter={filter} changeFilterHandler={changeFilterHandler} setFilterOption={filterOption} showFilterSection={showFilterSection}/> */}
                 <div className="flex items-center justify-between">
                     <p>Balance : {totalIncomes-totalExpenses}$</p>
                     <button className="w-30 h-5 rounded-sm bg-blue-500 bg p-4 flex justify-center items-center" onClick={()=>setShowForm(!showForm)}>{showForm ? `close Form` :'Add cost'}</button>

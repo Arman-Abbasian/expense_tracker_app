@@ -65,12 +65,11 @@ export const useCostActions=()=>{
     };
     const resetFilters=()=>{
         setAllCosts({...allcosts,filters:{name:"",costRange:0,kind:""}});
-    }   
-    
+        console.log(allcosts.filters)
+    };   
     //change filter state
    const changeFilterState=(payload)=>{
     setAllCosts({...allcosts,filters:{...allcosts.filters,[payload.target.name]:payload.target.value}});
-    console.log(allcosts.filters)
 };
         
         return {initialLoading,deleteOneCost,addOneCost,changeFilterState,resetFilters};
