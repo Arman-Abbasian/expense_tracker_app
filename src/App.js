@@ -12,6 +12,12 @@ import ShowTotalCostsContext from './components/useContext/ShowTotalCostsContext
 import FilterContext from './components/useContext/FilterContext';
 import CostDetailContext from './components/useContext/CostDetailContext';
 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import CostsRedux from './components/useRedux/CostsRedux.jsx';
+import FormRedux from './components/useRedux/FormRedux';
+import ShowTotalCostsRedux from './components/useRedux/ShowTotalCostsRedux';
+
 
 
 
@@ -22,14 +28,24 @@ function App() {
       <Balance />
     </Layout> */}
 
-    <Layout>
+    {/* <Layout>
       <CostProvider>
         <ShowTotalCostsContext />
         <FilterContext />
         <FormContext />
         <CostsContext />
       </CostProvider>
-    </Layout>
+    </Layout> */}
+
+    
+      <Provider store={store}>
+      <Layout>
+        <ShowTotalCostsRedux />
+        <FormRedux />
+        <CostsRedux />
+        </Layout>
+      </Provider>
+    
 
     <Toaster />
   </div>
