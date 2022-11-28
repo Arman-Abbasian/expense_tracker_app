@@ -16,7 +16,6 @@ const CostsContext = () => {
     const showItemDetail=(id)=>{
         const item=allcosts.costs.cost.find(item=>item.id===id);
         setCostItem(item);
-        console.log(costItem);
     }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
@@ -24,9 +23,9 @@ const CostsContext = () => {
         !allcosts.costs.cost && <p>no cost added</p>
         return (
             <div className="flex flex-col justify-center items-center gap-4 w-full">
-            {costItem && <CostDetailContext costItem={costItem} />}
+            {costItem && <CostDetailContext costItem={costItem} setCostItem={setCostItem}/>}
             {allcosts.costs.cost.map(item=>(
-                <CostContext key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={()=>deleteOneCost(item.id)} showDetail={()=>showItemDetail(item.id)} />
+                <CostContext key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={(e)=>deleteOneCost({e:e,id:item.id})} showDetail={()=>showItemDetail(item.id)} />
             ))}
         </div>
         )

@@ -56,7 +56,8 @@ export const useCostActions=()=>{
         };
         //delete one comment
     const deleteOneCost=(payload)=>{
-        axios.delete(`http://localhost:4000/expenses/${payload}`)
+        payload.e.stopPropagation();
+        axios.delete(`http://localhost:4000/expenses/${payload.id}`)
         .then(res=>{
             toast.success("cost deleted successfully");
             initialLoading();

@@ -2,8 +2,8 @@
   "expenses": [
     {
       "name": "sell",
-      "cost": "4500",
-      "type": "income",
+      "cost": "4000",
+      "type": "expense",
       "date": "2022-11-09",
       "id": 11
     },

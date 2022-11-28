@@ -5,31 +5,35 @@ import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar,AiOutlineClose } from "re
 import { toast } from "react-hot-toast";
 import { useCostActions } from "../../Providers/CostProvider";
 
-const CostDetailContext = ({costItem}) => {
-    console.log(costItem)
+const CostDetailContext = ({costItem,setCostItem}) => {
     const {initialLoading}=useCostActions();
-    const [item,setItem]=useState(costItem);
     const [formValues,setFormValues]=useState({name:costItem.name,cost:costItem.cost,type:costItem.type,date:costItem.date});
+
     const changeHandler=(e)=>{
         setFormValues({...formValues,[e.target.name]:e.target.value});
     }
+    useEffect(()=>{
+        setCostItem(costItem)
+    },[costItem]);
+
     const submitHandler=(e)=>{
         e.preventDefault();
         axios.put(`http://localhost:4000/expenses/${costItem.id}`,formValues)
         .then(res=>{
             toast.success("data changed successfully");
             initialLoading()
-            setItem(null);
+            setCostItem(null);
         })
         .catch(err=>toast.error(err.message))
     };
     
     const closeHandler=()=>{
-        setItem(null)
+        setCostItem(null)
     };
+
     return ( 
         <>
-        {item &&
+        {costItem &&
         <div className="fixed w-screen h-screen z-20 top-0 left-0 bg-slate-400 bg-opacity-50 flex justify-center items-center">
             <div className="transition ease-in-out duration-1000 bg-slate-900 p-6 relative backdrop-blur-xl rounded-md">
                  
