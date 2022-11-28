@@ -1,6 +1,6 @@
 import axios from "axios";
 import { filterValue } from "../../utils/filterValue";
-import { ADD_ONE_COST, DELETE_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS } from "./costsType";
+import { ADD_ONE_COST, DELETE_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS } from "./costsType";
 
 
 const initialState={
@@ -39,17 +39,10 @@ export const costsReducer=(state=initialState,action)=>{
             })
             .catch(err=>console.log(err));
             return {...state};
-        }
+        };
         case FILTER_COSTS:{
-            filterValue(state.costs,action.payload)
-            console.log(action.payload)
-            action.payload.e.stopPropagation();
-            axios.delete(`http://localhost:4000/expenses/${action.payload.id}`)
-            .then(res=>{
-                return {...state};
-            })
-            .catch(err=>console.log(err));
-            return {...state};
+           const filteredCosts= filterValue(state.costs,action.payload)
+            return {...state,costs:filteredCosts};
         }
             
         default:

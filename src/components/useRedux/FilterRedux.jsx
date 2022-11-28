@@ -2,15 +2,15 @@ import { Slider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCostActions, useCosts } from "../../Providers/CostProvider";
+import { fetchCosts, filterCosts } from "../../redux/costs/costsAction";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
 const FilterRedux = () => {
     const allcosts=useSelector(state=>state.costs)
     const dispatch=useDispatch();
+
     const [filters,setFilters]=useState({name:"",costRange:0,kind:""});
-
-
     const [expenseTolerance,setExpenseTolerance]=useState(null);
     const [uniqueName,setUniqueName]=useState([]);
     const [showFilterSection,setShowFilterSection]=useState(false)
@@ -25,18 +25,21 @@ const FilterRedux = () => {
      },[allcosts]);
 
      const changeFilterState=(e)=>{
-        set
+        setFilters({...filters,[e.target.name]:e.target.value})
      }
 
      const resetHandler=()=>{
-        resetFilters();
+        setFilters({name:"",costRange:0,kind:""});
+        fetchCosts();
      }
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        initialLoading();
+        dispatch(fetchCosts());
+        dispatch(filterCosts(filters))
        
 };
+
     return ( 
         <div className="mb-8">
             <button onClick={()=>setShowFilterSection(!showFilterSection)} className="w-full p-2 bg-blue-500 rounded-sm mb-2">{showFilterSection?  "hide Filter section" :"show Filter section"}</button>
