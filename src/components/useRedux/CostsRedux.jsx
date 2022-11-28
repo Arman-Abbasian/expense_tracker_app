@@ -19,6 +19,10 @@ const CostsRedux = () => {
         const item=allcosts.costs.cost.find(item=>item.id===id);
         setCostItem(item);
     }
+    const deleteHandler=(e,id)=>{
+        dispatch(deleteOneCost({e,id}));
+        dispatch(fetchCosts());
+    }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
         allcosts.costs.error &&  <p>{allcosts.costs.error.message}</p>
@@ -27,7 +31,7 @@ const CostsRedux = () => {
             <div className="flex flex-col justify-center items-center gap-4 w-full">
             {costItem && <CostDetailRedux costItem={costItem} setCostItem={setCostItem}/>}
             {allcosts.costs.map(item=>(
-                <CostRedux key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={(e)=>dispatch(deleteOneCost({e:e,id:item.id}))} showDetail={()=>showItemDetail(item.id)} />
+                <CostRedux key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={(e)=>deleteHandler(e,item.id)} showDetail={()=>showItemDetail(item.id)} />
             ))}
         </div>
         )

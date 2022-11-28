@@ -17,6 +17,7 @@ import store from './redux/store';
 import CostsRedux from './components/useRedux/CostsRedux.jsx';
 import FormRedux from './components/useRedux/FormRedux';
 import ShowTotalCostsRedux from './components/useRedux/ShowTotalCostsRedux';
+import FilterRedux from './components/useRedux/FilterRedux';
 
 
 
@@ -42,8 +43,9 @@ function App() {
       <Layout>
         <ShowTotalCostsRedux />
         <FormRedux />
+        <FilterRedux />
         <CostsRedux />
-        </Layout>
+      </Layout>
       </Provider>
     
 

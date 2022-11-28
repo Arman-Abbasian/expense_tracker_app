@@ -36,18 +36,11 @@
       "id": 18
     },
     {
-      "name": "Ali",
-      "cost": "2500",
-      "type": "expense",
-      "date": "2022-11-09",
+      "name": "income",
+      "cost": "3000",
+      "type": "income",
+      "date": "2022-11-08",
       "id": 19
-    },
-    {
-      "name": "Arman",
-      "cost": "1000",
-      "type": "expense",
-      "date": "2022-11-07",
-      "id": 20
     }
   ]
 }
