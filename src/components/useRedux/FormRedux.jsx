@@ -13,14 +13,10 @@ const FormRedux = ({showForm}) => {
     }
     const submitHandler=(e)=>{
         e.preventDefault();
-        console.log(allcosts)
-         dispatch(addOneCost(formValues));
+        dispatch(addOneCost(formValues));
         toast.success('data added successfully');
-        if(allcosts.status===true){
-        console.log(allcosts)
-         dispatch(fetchCosts());
+        dispatch(fetchCosts());
         setFormValues({name:"",cost:0,type:"",date:""});
-    }
     }
     return ( 
         <div className={`transition ease-in-out duration-1000 ${showForm? "block":"hidden"}`}>

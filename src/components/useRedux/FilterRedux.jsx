@@ -29,7 +29,8 @@ const FilterRedux = () => {
 
      const resetHandler=()=>{
         setFilters({name:"",costRange:0,kind:""});
-        fetchCosts();
+        dispatch(filterCosts(filters))
+        dispatch(fetchCosts());
      }
 
     const submitHandler=(e)=>{
@@ -67,7 +68,7 @@ const FilterRedux = () => {
                 {expenseTolerance && 
                 <div>
                     <label htmlFor="expense">expense range</label>  
-                    <Slider defaultValue={expenseTolerance.minCost} value={allcosts.filters.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={(e)=>changeFilterState(e)} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
+                    <Slider defaultValue={expenseTolerance.minCost} value={filters.costRange} min={expenseTolerance.minCost} max={expenseTolerance.maxCost} onChange={(e)=>changeFilterState(e)} name="costRange" aria-label="Default" valueLabelDisplay="auto" />
                 </div>
             }
                 <input type="submit" value="apply filter" className="w-full p-2 bg-blue-500 rounded-sm cursor-pointer hover:bg-blue-400" />
