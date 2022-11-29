@@ -23,7 +23,7 @@
     },
     {
       "name": "daroo",
-      "cost": "1200",
+      "cost": "12000",
       "type": "expense",
       "date": "2022-11-23",
       "id": 17
@@ -41,6 +41,27 @@
       "type": "income",
       "date": "2022-11-08",
       "id": 19
+    },
+    {
+      "name": "Ali",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 20
+    },
+    {
+      "name": "آرمان عباسیان",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 21
+    },
+    {
+      "name": "IATF",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 22
     }
   ]
 }

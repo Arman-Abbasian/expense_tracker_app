@@ -1,19 +1,27 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addOneCost, fetchCosts } from "../../redux/costs/costsAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addOneCost, changeStatus, fetchCosts } from "../../redux/costs/costsAction";
 
 const FormRedux = ({showForm}) => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:"",date:""});
+    const allcosts=useSelector(state=>state.costs)
     const dispatch=useDispatch();
     const changeHandler=(e)=>{
         setFormValues({...formValues,[e.target.name]:e.target.value});
     }
     const submitHandler=(e)=>{
         e.preventDefault();
-        dispatch(addOneCost(formValues));
-        dispatch(fetchCosts());
+        dispatch(changeStatus());
+        console.log(allcosts)
+         dispatch(addOneCost(formValues));
+        toast.success('data added successfully');
+        if(allcosts.status===true){
+        console.log(allcosts)
+         dispatch(fetchCosts());
         setFormValues({name:"",cost:0,type:"",date:""});
+    }
     }
     return ( 
         <div className={`transition ease-in-out duration-1000 ${showForm? "block":"hidden"}`}>

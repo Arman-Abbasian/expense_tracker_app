@@ -36,8 +36,10 @@ const FilterRedux = () => {
     const submitHandler=(e)=>{
         e.preventDefault();
         dispatch(fetchCosts());
+        if(allcosts.costs.length>0){
+        console.log(allcosts.costs.length)
         dispatch(filterCosts(filters))
-       
+    }
 };
 
     return ( 

@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { deleteOneCost, fetchCosts } from "../../redux/costs/costsAction";
+import { toast } from "react-hot-toast";
+import { changeStatus, deleteOneCost, fetchCosts } from "../../redux/costs/costsAction";
 import CostRedux from "./CostRedux";
 import CostDetailRedux from "./CostDetailRedux";
 
@@ -16,12 +16,16 @@ const CostsRedux = () => {
 
     useEffect(()=>{dispatch(fetchCosts())},[]);
     const showItemDetail=(id)=>{
-        const item=allcosts.costs.cost.find(item=>item.id===id);
+        const item=allcosts.costs.find(item=>item.id===id);
         setCostItem(item);
     }
     const deleteHandler=(e,id)=>{
+        dispatch(changeStatus)
         dispatch(deleteOneCost({e,id}));
+        if(allcosts.status===true){
+        toast.success("data deleted successfully");
         dispatch(fetchCosts());
+    }
     }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>

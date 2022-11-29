@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_ONE_COST, DELETE_ONE_COST, EDIT_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS } from "./costsType";
+import { ADD_ONE_COST, CHANGE_STATUS, DELETE_ONE_COST, EDIT_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS } from "./costsType";
 
 
 export const fetchCostsRequest=()=>{
@@ -25,7 +25,6 @@ export const fetchCosts=()=>{
         dispatch(fetchCostsRequest());
         axios.get(`http://localhost:4000/expenses`)
         .then(res=>{
-            console.log(res.data)
             dispatch(fetchCostsSuccess(res.data));
         })
         .catch(err=>{
@@ -58,5 +57,10 @@ export const filterCosts=(payload)=>{
     return{
         type:FILTER_COSTS,
         payload
+    }
+};
+export const changeStatus=()=>{
+    return{
+        type:CHANGE_STATUS
     }
 }
