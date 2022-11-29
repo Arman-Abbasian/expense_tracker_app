@@ -4,8 +4,10 @@ import { useState } from "react";
 import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar,AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useCostActions } from "../../Providers/CostProvider";
+import { fetchCosts } from "../../redux/costs/costsAction";
 
 const CostDetailRedux = ({costItem,setCostItem}) => {
+
     const {initialLoading}=useCostActions();
     const [formValues,setFormValues]=useState({name:costItem.name,cost:costItem.cost,type:costItem.type,date:costItem.date});
 
@@ -21,7 +23,7 @@ const CostDetailRedux = ({costItem,setCostItem}) => {
         axios.put(`http://localhost:4000/expenses/${costItem.id}`,formValues)
         .then(res=>{
             toast.success("data changed successfully");
-            initialLoading()
+            fetchCosts();
             setCostItem(null);
         })
         .catch(err=>toast.error(err.message))

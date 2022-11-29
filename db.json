@@ -1,10 +1,10 @@
 {
   "expenses": [
     {
-      "name": "sell",
-      "cost": "4000",
+      "name": "selll",
+      "cost": "2000",
       "type": "expense",
-      "date": "2022-11-09",
+      "date": "2022-11-08",
       "id": 11
     },
     {
@@ -16,7 +16,7 @@
     },
     {
       "name": "food",
-      "cost": "2500",
+      "cost": "2000",
       "type": "expense",
       "date": "2022-11-01",
       "id": 13
