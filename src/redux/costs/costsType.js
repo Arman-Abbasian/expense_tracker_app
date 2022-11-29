@@ -5,4 +5,3 @@ export const ADD_ONE_COST="ADD_ONE_COST";
 export const DELETE_ONE_COST="DELETE_ONE_COST";
 export const EDIT_ONE_COST="EDIT_ONE_COST";
 export const FILTER_COSTS="FILTER_COSTS";
-export const CHANGE_STATUS="CHANGE_STATUS";

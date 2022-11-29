@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { changeStatus, deleteOneCost, fetchCosts } from "../../redux/costs/costsAction";
+import {  deleteOneCost, fetchCosts } from "../../redux/costs/costsAction";
 import CostRedux from "./CostRedux";
 import CostDetailRedux from "./CostDetailRedux";
 
@@ -20,7 +20,6 @@ const CostsRedux = () => {
         setCostItem(item);
     }
     const deleteHandler=(e,id)=>{
-        dispatch(changeStatus)
         dispatch(deleteOneCost({e,id}));
         if(allcosts.status===true){
         toast.success("data deleted successfully");
