@@ -27,11 +27,11 @@ export const removeAsyncCost=createAsyncThunk("costs/removeAsyncCost", async (pa
   }
 });
 
-
 const initialState = {
   costs:[],
   error:null,
   loading:false,
+  filters:{name:"",costRange:0,kind:""}
 }
 
 export const costsSlice = createSlice({
@@ -42,13 +42,13 @@ export const costsSlice = createSlice({
   extraReducers:{
   
     [getAsyncCosts.fulfilled]: (state,action) => {
-      return {costs:action.payload,loading:false,error:null}
+      return {costs:action.payload,loading:false,error:null,filters:state.filters}
     },
     [getAsyncCosts.pending]: (state,action) => {
-      return {costs:[],loading:true,error:null}
+      return {costs:[],loading:true,error:null,filters:state.filters}
     },
     [getAsyncCosts.rejected]: (state,action) => {
-      return {costs:[],loading:false,error:action.payload}
+      return {costs:[],loading:false,error:action.payload,filters:state.filters}
     },
     [removeAsyncCost.fulfilled]: (state,action) => {
      const remaindCosts= state.costs.filter(item=>item.id!==action.payload);

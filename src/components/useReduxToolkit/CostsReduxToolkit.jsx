@@ -3,10 +3,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import {  deleteOneCost, fetchCosts } from "../../redux/costs/costsAction";
 import CostReduxToolkit from './CostReduxToolkit';
 import CostDetailReduxToolkit from './CostDetailReduxToolkit';
-import { getAsyncCosts } from "../../feature/costsSlice";
+import { getAsyncCosts, removeAsyncCost } from "../../feature/costsSlice";
 
 
 
@@ -22,9 +21,9 @@ const CostsReduxToolkit = () => {
         setCostItem(item);
     }
     const deleteHandler=(e,id)=>{
-        dispatch(deleteOneCost({e,id}));
+        dispatch(removeAsyncCost({e,id}));
         toast.success("data deleted successfully");
-        dispatch(fetchCosts());
+        dispatch(getAsyncCosts());
     }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
