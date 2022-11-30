@@ -1,8 +1,8 @@
 import { Slider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAsyncCosts } from "../../feature/costsSlice";
-import { fetchCosts, filterCosts } from "../../redux/costs/costsAction";
+import { filterAsyncCosts, getAsyncCosts } from "../../feature/costsSlice";
+import {  filterCosts } from "../../redux/costs/costsAction";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
@@ -36,8 +36,7 @@ const FilterReduxToolkit = () => {
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        dispatch(filterCosts(filters))
-        dispatch(getAsyncCosts());
+        dispatch(filterAsyncCosts(filters))
 };
 
     return ( 

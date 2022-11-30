@@ -1,6 +1,7 @@
 import { createSlice,createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
+import { filterValue } from '../utils/filterValue';
 
 
 export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (_,{rejectWithValue})=>{
@@ -11,6 +12,7 @@ export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (_,{rej
     return rejectWithValue([],error)
   }
 });
+
 export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,{rejectWithValue})=>{
   try {
     const response=await axios.post(`http://localhost:4000/expenses`,payload);
@@ -33,6 +35,15 @@ export const changeAsyncCost=createAsyncThunk("costs/changeAsyncCost", async (pa
   try {
     const response=await axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues);
     return {newData:response.data,id:payload.id};
+  } catch (error) {
+    return rejectWithValue([],error)
+  }
+});
+
+export const filterAsyncCosts=createAsyncThunk("costs/filterAsyncCosts", async (payload,{rejectWithValue})=>{
+  try {
+    const response=await axios.get(`http://localhost:4000/expenses`);
+    return {data:response.data,filters:payload};
   } catch (error) {
     return rejectWithValue([],error)
   }
@@ -72,7 +83,11 @@ export const costsSlice = createSlice({
       const index=state.costs.findIndex(item=>item.id===action.payload.id);
       state.costs.splice(index,1,action.payload.newData);
     },
+    [filterAsyncCosts.fulfilled]: (state,action) => {
+      console.log(action.payload.filters)
+      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
+      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
+     },
   }
-})
-
-export default costsSlice.reducer
+});
+export default costsSlice.reducer;
