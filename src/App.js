@@ -12,14 +12,21 @@ import ShowTotalCostsContext from './components/useContext/ShowTotalCostsContext
 import FilterContext from './components/useContext/FilterContext';
 import CostDetailContext from './components/useContext/CostDetailContext';
 
+
+
 import { Provider } from 'react-redux';
-import store from './redux/store';
+
+//import store from './redux/store';
 import CostsRedux from './components/useRedux/CostsRedux.jsx';
 import FormRedux from './components/useRedux/FormRedux';
 import ShowTotalCostsRedux from './components/useRedux/ShowTotalCostsRedux';
 import FilterRedux from './components/useRedux/FilterRedux';
 
-
+import {store} from './feature/store';
+import CostsReduxToolkit from './components/useReduxToolkit/CostsReduxToolkit';
+import FormReduxToolkit from './components/useReduxToolkit/FormReduxToolkit';
+import ShowTotalCostsReduxToolkit from './components/useReduxToolkit/ShowTotalCostsReduxToolkit';
+import FilterReduxToolkit from './components/useReduxToolkit/FilterReduxToolkit';
 
 
 function App() {
@@ -39,14 +46,25 @@ function App() {
     </Layout> */}
 
     
-      <Provider store={store}>
+      {/* <Provider store={store}>
       <Layout>
         <ShowTotalCostsRedux />
         <FormRedux />
         <FilterRedux />
         <CostsRedux />
       </Layout>
+      </Provider> */}
+
+<Provider store={store}>
+      <Layout>
+        <ShowTotalCostsReduxToolkit />
+        <FormReduxToolkit />
+        <FilterReduxToolkit /> 
+        <CostsReduxToolkit />
+      </Layout>
       </Provider>
+
+
     
 
     <Toaster />

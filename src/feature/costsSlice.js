@@ -51,11 +51,11 @@ export const costsSlice = createSlice({
       return {costs:[],loading:false,error:action.payload}
     },
     [removeAsyncCost.fulfilled]: (state,action) => {
-     const remaindComment= state.comments.filter(item=>item.id!==action.payload);
-     state.comments=remaindComment
+     const remaindCosts= state.costs.filter(item=>item.id!==action.payload);
+     state.costs=remaindCosts
     },
     [addAsyncCost.fulfilled]: (state,action) => {
-      state.comments.push(action.payload)
+      state.costs.push(action.payload)
     },
   }
 })
