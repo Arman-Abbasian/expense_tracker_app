@@ -1,5 +1,6 @@
-import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice,createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 
 
 export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (_,{rejectWithValue})=>{
@@ -13,6 +14,7 @@ export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (_,{rej
 export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,{rejectWithValue})=>{
   try {
     const response=await axios.post(`http://localhost:4000/expenses`,payload);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     return rejectWithValue([],error)
@@ -21,7 +23,16 @@ export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,
 export const removeAsyncCost=createAsyncThunk("costs/removeAsyncCost", async (payload,{rejectWithValue})=>{
   try {
     await axios.delete(`http://localhost:4000/expenses/${payload}`);
+    console.log(payload)
     return payload;
+  } catch (error) {
+    return rejectWithValue([],error)
+  }
+});
+export const changeAsyncCost=createAsyncThunk("costs/changeAsyncCost", async (payload,{rejectWithValue})=>{
+  try {
+    const response=await axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues);
+    return {newData:response.data,id:payload.id};
   } catch (error) {
     return rejectWithValue([],error)
   }
@@ -56,6 +67,10 @@ export const costsSlice = createSlice({
     },
     [addAsyncCost.fulfilled]: (state,action) => {
       state.costs.push(action.payload)
+    },
+    [changeAsyncCost.fulfilled]: (state,action) => {
+      const index=state.costs.findIndex(item=>item.id===action.payload.id);
+      state.costs.splice(index,1,action.payload.newData);
     },
   }
 })

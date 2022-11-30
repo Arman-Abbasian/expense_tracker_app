@@ -1,7 +1,7 @@
 {
   "expenses": [
     {
-      "name": "selll",
+      "name": "sell",
       "cost": "2000",
       "type": "expense",
       "date": "2022-11-08",
@@ -41,6 +41,13 @@
       "type": "income",
       "date": "2022-11-08",
       "id": 19
+    },
+    {
+      "name": "sell",
+      "cost": "1000",
+      "type": "income",
+      "date": "2022-11-08",
+      "id": 20
     }
   ]
 }

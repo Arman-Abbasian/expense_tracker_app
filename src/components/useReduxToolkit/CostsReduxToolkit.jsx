@@ -21,9 +21,10 @@ const CostsReduxToolkit = () => {
         setCostItem(item);
     }
     const deleteHandler=(e,id)=>{
-        dispatch(removeAsyncCost({e,id}));
+        e.stopPropagation();
+        dispatch(removeAsyncCost(id));
         toast.success("data deleted successfully");
-        dispatch(getAsyncCosts());
+        
     }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
