@@ -15,17 +15,16 @@ const CostsReduxToolkit = () => {
     const dispatch=useDispatch();
     console.log(allcosts)
 
-    useEffect(()=>{dispatch(getAsyncCosts())},[]);
+    useEffect(()=>{dispatch(getAsyncCosts(allcosts.filters))},[]);
     const showItemDetail=(id)=>{
         const item=allcosts.costs.find(item=>item.id===id);
         setCostItem(item);
-    }
+    };
     const deleteHandler=(e,id)=>{
         e.stopPropagation();
         dispatch(removeAsyncCost(id));
-        toast.success("data deleted successfully");
-        
-    }
+        toast.success("data deleted successfully");  
+    };
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
         allcosts.costs.error &&  <p>{allcosts.costs.error.message}</p>

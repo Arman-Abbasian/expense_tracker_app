@@ -1,8 +1,7 @@
 import { Slider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterAsyncCosts, getAsyncCosts } from "../../feature/costsSlice";
-import {  filterCosts } from "../../redux/costs/costsAction";
+import { getAsyncCosts } from "../../feature/costsSlice";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
@@ -30,13 +29,12 @@ const FilterReduxToolkit = () => {
 
      const resetHandler=()=>{
         setFilters({name:"",costRange:0,kind:""});
-        dispatch(filterCosts(filters))
-        dispatch(getAsyncCosts());
+        dispatch(getAsyncCosts(filters));
      };
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        dispatch(filterAsyncCosts(filters))
+        dispatch(getAsyncCosts(filters))
 };
 
     return ( 
@@ -48,16 +46,15 @@ const FilterReduxToolkit = () => {
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
-                        <select name="kind" value={allcosts.filters.kind} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
+                        <select name="kind" value={filters.kind} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             <option value="income">income</option>
                             <option value="expense">expense</option>
                         </select> 
                     </div>
-
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>item</label>
-                        <select name="name" value={allcosts.filters.name} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
+                        <select name="name" value={filters.name} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             {uniqueName.map(item=>{
                                 return <option key={item} value={item}>{item}</option>

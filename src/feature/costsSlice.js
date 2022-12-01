@@ -1,13 +1,12 @@
 import { createSlice,createAsyncThunk, current } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { act } from 'react-dom/test-utils';
 import { filterValue } from '../utils/filterValue';
 
 
-export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (_,{rejectWithValue})=>{
+export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (payload,{rejectWithValue})=>{
   try {
     const response=await axios.get(`http://localhost:4000/expenses`);
-    return response.data;
+    return {data:response.data,filters:payload};
   } catch (error) {
     return rejectWithValue([],error)
   }
@@ -40,14 +39,6 @@ export const changeAsyncCost=createAsyncThunk("costs/changeAsyncCost", async (pa
   }
 });
 
-export const filterAsyncCosts=createAsyncThunk("costs/filterAsyncCosts", async (payload,{rejectWithValue})=>{
-  try {
-    const response=await axios.get(`http://localhost:4000/expenses`);
-    return {data:response.data,filters:payload};
-  } catch (error) {
-    return rejectWithValue([],error)
-  }
-});
 
 const initialState = {
   costs:[],
@@ -64,7 +55,9 @@ export const costsSlice = createSlice({
   extraReducers:{
   
     [getAsyncCosts.fulfilled]: (state,action) => {
-      return {costs:action.payload,loading:false,error:null,filters:state.filters}
+      console.log(action.payload)
+      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
+      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
     [getAsyncCosts.pending]: (state,action) => {
       return {costs:[],loading:true,error:null,filters:state.filters}
@@ -77,17 +70,12 @@ export const costsSlice = createSlice({
      state.costs=remaindCosts
     },
     [addAsyncCost.fulfilled]: (state,action) => {
-      state.costs.push(action.payload)
+      state.costs.push(action.payload);
     },
     [changeAsyncCost.fulfilled]: (state,action) => {
       const index=state.costs.findIndex(item=>item.id===action.payload.id);
       state.costs.splice(index,1,action.payload.newData);
     },
-    [filterAsyncCosts.fulfilled]: (state,action) => {
-      console.log(action.payload.filters)
-      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
-      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
-     },
   }
 });
 export default costsSlice.reducer;

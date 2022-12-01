@@ -2,8 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addOneCost, fetchCosts } from "../../redux/costs/costsAction";
-import {addAsyncCost, getAsyncCosts} from '../../feature/costsSlice.js';
+import {addAsyncCost, filterAsyncCosts, getAsyncCosts} from '../../feature/costsSlice.js';
 
 const FormRedux = ({showForm}) => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:"",date:""});
@@ -15,8 +14,8 @@ const FormRedux = ({showForm}) => {
     const submitHandler=(e)=>{
         e.preventDefault();
         dispatch(addAsyncCost(formValues));
+        dispatch(getAsyncCosts(allcosts.filters));
         toast.success('data added successfully');
-        // dispatch(getAsyncCosts());
         setFormValues({name:"",cost:0,type:"",date:""});
     }
     return ( 
