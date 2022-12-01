@@ -23,6 +23,7 @@ const CostDetailReduxToolkit = ({costItem,setCostItem}) => {
 
     const submitHandler=(e)=>{
         e.preventDefault();
+        toast.success("data change successfully")
         dispatch(changeAsyncCost({id:costItem.id,formValues}));
         setCostItem(null)
     };
