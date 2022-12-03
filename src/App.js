@@ -27,6 +27,7 @@ import CostsReduxToolkit from './components/useReduxToolkit/CostsReduxToolkit';
 import FormReduxToolkit from './components/useReduxToolkit/FormReduxToolkit';
 import ShowTotalCostsReduxToolkit from './components/useReduxToolkit/ShowTotalCostsReduxToolkit';
 import FilterReduxToolkit from './components/useReduxToolkit/FilterReduxToolkit';
+import Component from './components/asyncReducer';
 
 
 function App() {
@@ -55,14 +56,18 @@ function App() {
       </Layout>
       </Provider> */}
 
-<Provider store={store}>
-      <Layout>
-        <ShowTotalCostsReduxToolkit />
-        <FormReduxToolkit />
-        <FilterReduxToolkit /> 
-        <CostsReduxToolkit />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <ShowTotalCostsReduxToolkit />
+          <FormReduxToolkit />
+          <FilterReduxToolkit /> 
+          <CostsReduxToolkit />
+        </Layout>
       </Provider>
+
+
+
+      {/* <Component /> */}
 
 
     

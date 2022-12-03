@@ -6,10 +6,11 @@ import { toast } from "react-hot-toast";
 import { useCostActions } from "../../Providers/CostProvider";
 import { fetchCosts } from "../../redux/costs/costsAction";
 import { changeAsyncCost } from "../../feature/costsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CostDetailReduxToolkit = ({costItem,setCostItem}) => {
     const dispatch=useDispatch();
+    const allcosts=useSelector(state=>state.costs)
 
     const {initialLoading}=useCostActions();
     const [formValues,setFormValues]=useState({name:costItem.name,cost:costItem.cost,type:costItem.type,date:costItem.date});
@@ -24,7 +25,7 @@ const CostDetailReduxToolkit = ({costItem,setCostItem}) => {
     const submitHandler=(e)=>{
         e.preventDefault();
         toast.success("data change successfully")
-        dispatch(changeAsyncCost({id:costItem.id,formValues}));
+        dispatch(changeAsyncCost({id:costItem.id,formValues,filters:allcosts.filters}));
         setCostItem(null)
     };
     

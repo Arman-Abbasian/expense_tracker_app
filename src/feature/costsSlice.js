@@ -14,26 +14,29 @@ export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (payloa
 
 export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,{rejectWithValue})=>{
   try {
-    const response=await axios.post(`http://localhost:4000/expenses`,payload);
-    console.log(response.data)
-    return response.data;
+    await axios.post(`http://localhost:4000/expenses`,payload.formValues)
+    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    return {data:data,filters:payload.filters};
   } catch (error) {
     return rejectWithValue([],error)
   }
 });
 export const removeAsyncCost=createAsyncThunk("costs/removeAsyncCost", async (payload,{rejectWithValue})=>{
   try {
-    await axios.delete(`http://localhost:4000/expenses/${payload}`);
-    console.log(payload)
-    return payload;
+    await axios.delete(`http://localhost:4000/expenses/${payload.id}`)
+    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    return  {data:data,filters:payload.filters};
   } catch (error) {
     return rejectWithValue([],error)
   }
 });
 export const changeAsyncCost=createAsyncThunk("costs/changeAsyncCost", async (payload,{rejectWithValue})=>{
   try {
-    const response=await axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues);
-    return {newData:response.data,id:payload.id};
+    console.log(payload)
+    await axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues);
+    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    return  {data:data,filters:payload.filters}; 
+    
   } catch (error) {
     return rejectWithValue([],error)
   }
@@ -66,15 +69,18 @@ export const costsSlice = createSlice({
       return {costs:[],loading:false,error:action.payload,filters:state.filters}
     },
     [removeAsyncCost.fulfilled]: (state,action) => {
-     const remaindCosts= state.costs.filter(item=>item.id!==action.payload);
-     state.costs=remaindCosts
+      console.log(action.payload);
+      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
+      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
     [addAsyncCost.fulfilled]: (state,action) => {
-      state.costs.push(action.payload);
+      console.log(action.payload);
+      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
+      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
     [changeAsyncCost.fulfilled]: (state,action) => {
-      const index=state.costs.findIndex(item=>item.id===action.payload.id);
-      state.costs.splice(index,1,action.payload.newData);
+      const filteredCosts= filterValue(action.payload.data,action.payload.filters)
+      return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
   }
 });

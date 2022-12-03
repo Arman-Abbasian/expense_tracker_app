@@ -22,7 +22,7 @@ const CostsReduxToolkit = () => {
     };
     const deleteHandler=(e,id)=>{
         e.stopPropagation();
-        dispatch(removeAsyncCost(id));
+        dispatch(removeAsyncCost({id:id,filters:allcosts.filters}));
         toast.success("data deleted successfully");  
     };
     const rendered=()=>{
