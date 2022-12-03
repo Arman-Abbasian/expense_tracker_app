@@ -14,7 +14,7 @@ const FormRedux = ({showForm}) => {
     const submitHandler=(e)=>{
         e.preventDefault();
         console.log(allcosts)
-        dispatch(addOneCost({formValues,filters:allcosts.filters}));
+        dispatch(addOneCost(formValues));
         toast.success('data added successfully');
         setFormValues({name:"",cost:0,type:"",date:""});
     }

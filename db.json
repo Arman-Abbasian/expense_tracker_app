@@ -56,39 +56,18 @@
       "id": 22
     },
     {
-      "name": "IATF",
-      "cost": 0,
-      "type": "",
+      "name": "Ali",
+      "cost": "1499",
+      "type": "income",
       "date": "",
       "id": 23
     },
     {
-      "name": "IATF",
-      "cost": 0,
-      "type": "",
+      "name": "Ali",
+      "cost": "1200",
+      "type": "income",
       "date": "",
       "id": 24
-    },
-    {
-      "name": "IATF",
-      "cost": 0,
-      "type": "",
-      "date": "",
-      "id": 25
-    },
-    {
-      "name": "Ali",
-      "cost": 0,
-      "type": "",
-      "date": "",
-      "id": 26
-    },
-    {
-      "name": "IATF",
-      "cost": 0,
-      "type": "",
-      "date": "",
-      "id": 27
     }
   ]
 }
