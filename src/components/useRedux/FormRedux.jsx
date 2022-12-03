@@ -6,16 +6,16 @@ import { addOneCost, fetchCosts } from "../../redux/costs/costsAction";
 
 const FormRedux = ({showForm}) => {
     const [formValues,setFormValues]=useState({name:"",cost:0,type:"",date:""});
-    const allcosts=useSelector(state=>state.costs)
+    const allcosts=useSelector(state=>state.costs);
     const dispatch=useDispatch();
     const changeHandler=(e)=>{
         setFormValues({...formValues,[e.target.name]:e.target.value});
     }
     const submitHandler=(e)=>{
         e.preventDefault();
-        dispatch(addOneCost(formValues));
+        console.log(allcosts)
+        dispatch(addOneCost({formValues,filters:allcosts.filters}));
         toast.success('data added successfully');
-        dispatch(fetchCosts());
         setFormValues({name:"",cost:0,type:"",date:""});
     }
     return ( 

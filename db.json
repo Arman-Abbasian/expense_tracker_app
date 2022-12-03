@@ -9,7 +9,7 @@
     },
     {
       "name": "income",
-      "cost": "2100",
+      "cost": "4000",
       "type": "income",
       "date": "2022-11-08",
       "id": 12
@@ -54,6 +54,41 @@
     },
     {
       "id": 22
+    },
+    {
+      "name": "IATF",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 23
+    },
+    {
+      "name": "IATF",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 24
+    },
+    {
+      "name": "IATF",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 25
+    },
+    {
+      "name": "Ali",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 26
+    },
+    {
+      "name": "IATF",
+      "cost": 0,
+      "type": "",
+      "date": "",
+      "id": 27
     }
   ]
 }

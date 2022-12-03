@@ -13,7 +13,6 @@ const CostsRedux = () => {
     const allcosts=useSelector(state=>state.costs);
     const dispatch=useDispatch();
     console.log(allcosts)
-
     useEffect(()=>{dispatch(fetchCosts())},[]);
     const showItemDetail=(id)=>{
         const item=allcosts.costs.find(item=>item.id===id);

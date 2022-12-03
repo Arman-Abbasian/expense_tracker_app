@@ -16,23 +16,17 @@ export const costsReducer=(state=initialState,action)=>{
             return {costs:[],error:"",laoding:true,filters:state.filters}
         };
         case FETCH_COSTS_SUCCESS:{
-            console.log(state.filters)
+            console.log(state)
             const filteredItems= filterValue(action.payload,state.filters);
-            console.log(filteredItems)
-            return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
+            return {costs:filteredItems,error:"",laoding:false,filters:action.payload.filters}
         };
         case FETCH_COSTS_FAILURE:{
-            return {costs:[],error:action.payload,laoding:false}
+            console.log(state)
+            return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         }
 
         case ADD_ONE_COST:{
-            axios.post(`http://localhost:4000/expenses`,action.payload)
-            .then(res=>{
-                console.log(res.data)
-                return {...state};
-            })
-            .catch(err=>console.log(err.message))
-           return {...state};
+            return {costs:action.payload,error:"",laoding:false,filters:state.filters}
         };
 
         case DELETE_ONE_COST:{

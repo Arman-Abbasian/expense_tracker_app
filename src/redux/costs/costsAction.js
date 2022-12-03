@@ -1,10 +1,11 @@
 import axios from "axios";
+import { filterValue } from "../../utils/filterValue";
 import { ADD_ONE_COST, DELETE_ONE_COST, EDIT_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, Filter, FILTER_COSTS } from "./costsType";
 
 
-export const fetchCostsRequest=()=>{
+export const fetchCostsRequest=(payload)=>{
     return{
-        type:FETCH_COSTS_REQUEST
+        type:FETCH_COSTS_REQUEST,
     }
 };
 export const fetchCostsFailure=(payload)=>{
@@ -14,6 +15,19 @@ export const fetchCostsFailure=(payload)=>{
     }
 };
 const fetchCostsSuccess=(payload)=>{
+    return{
+        type:FETCH_COSTS_SUCCESS,
+        payload
+    }
+};
+
+export const postCostsFailure=(payload)=>{
+    return{
+        type:FETCH_COSTS_FAILURE,
+        payload
+    }
+};
+const postCostsSuccess=(payload)=>{
     return{
         type:FETCH_COSTS_SUCCESS,
         payload
@@ -32,13 +46,31 @@ export const fetchCosts=()=>{
         })
     }
 };
-
 export const addOneCost=(payload)=>{
-    return{
-        type:ADD_ONE_COST,
-        payload
+    console.log(payload)
+    return function(dispatch){
+        axios.post(`http://localhost:4000/expenses`,payload.formValues)
+        .then(res=>{
+            axios.get(`http://localhost:4000/expenses`)
+            .then(res=>{
+                console.log(res.data,payload.filters)
+                const filteredItems=filterValue(res.data,payload.filters);
+                console.log(filteredItems)
+                dispatch(postCostsSuccess(filteredItems));
+            })   
+        })
+        .catch(err=>{
+            dispatch(postCostsFailure(err.message))
+        })
     }
 };
+
+// export const addOneCost=(payload)=>{
+//     return{
+//         type:ADD_ONE_COST,
+//         payload
+//     }
+// };
 export const editOneCost=(payload)=>{
     return{
         type:EDIT_ONE_COST,
