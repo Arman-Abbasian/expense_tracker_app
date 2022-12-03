@@ -1,6 +1,6 @@
 import axios from "axios";
 import { filterValue } from "../../utils/filterValue";
-import { ADD_ONE_COST, DELETE_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS, POST_COSTS_FAILURE, POST_COSTS_SUCCESS } from "./costsType";
+import {DELETE_ONE_COST_FAILURE, DELETE_ONE_COST_SUCCESS, EDIT_ONE_COST_SUCCESS, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, POST_ONE_COST_FAILURE, POST_ONE_COST_SUCCESS } from "./costsType";
 
 
 const initialState={
@@ -24,28 +24,34 @@ export const costsReducer=(state=initialState,action)=>{
             console.log(state)
             return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         }
-
-        case POST_COSTS_SUCCESS:{
+        case POST_ONE_COST_SUCCESS:{
             console.log(action.payload)
             const filteredItems=filterValue(action.payload,state.filters);
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
-        case POST_COSTS_FAILURE:{
+        case POST_ONE_COST_FAILURE:{
+            return {costs:[],error:action.payload,laoding:false,filters:state.filters}
+        };
+
+        //
+        case DELETE_ONE_COST_SUCCESS:{
+            console.log(action.payload)
+            const filteredItems=filterValue(action.payload,state.filters);
+            return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
+        };
+        case DELETE_ONE_COST_FAILURE:{
+            return {costs:[],error:action.payload,laoding:false,filters:state.filters}
+        };
+        //
+        case EDIT_ONE_COST_SUCCESS:{
+            console.log(action.payload)
+            const filteredItems=filterValue(action.payload,state.filters);
+            return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
+        };
+        case EDIT_ONE_COST_FAILURE:{
             return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         }
-
-        case DELETE_ONE_COST:{
-            action.payload.e.stopPropagation();
-            axios.delete(`http://localhost:4000/expenses/${action.payload.id}`)
-            .then(res=>{
-                return {...state};
-            })
-            .catch(err=>console.log(err));
-            return  {...state};
-        };
-        case FILTER_COSTS:{
-            return {...state,filters:action.payload}
-        };
+        
             
         default:
             return state;

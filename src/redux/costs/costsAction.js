@@ -1,6 +1,6 @@
 import axios from "axios";
 import { filterValue } from "../../utils/filterValue";
-import { ADD_ONE_COST, DELETE_ONE_COST, EDIT_ONE_COST, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, Filter, FILTER_COSTS, POST_COSTS_SUCCESS } from "./costsType";
+import { DELETE_ONE_COST_FAILURE, DELETE_ONE_COST_SUCCESS, EDIT_ONE_COST, EDIT_ONE_COST_FAILURE, EDIT_ONE_COST_SUCCESS, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS, POST_COSTS_SUCCESS, POST_ONE_COST_FAILURE, POST_ONE_COST_SUCCESS } from "./costsType";
 
 
 export const fetchCostsRequest=(payload)=>{
@@ -23,13 +23,37 @@ const fetchCostsSuccess=(payload)=>{
 
 export const postCostsFailure=(payload)=>{
     return{
-        type:FETCH_COSTS_FAILURE,
+        type:POST_ONE_COST_FAILURE,
         payload
     }
 };
 const postCostsSuccess=(payload)=>{
     return{
-        type:POST_COSTS_SUCCESS,
+        type:POST_ONE_COST_SUCCESS,
+        payload
+    }
+};
+export const deleteCostsFailure=(payload)=>{
+    return{
+        type:DELETE_ONE_COST_FAILURE,
+        payload
+    }
+};
+const deleteCostsSuccess=(payload)=>{
+    return{
+        type:DELETE_ONE_COST_SUCCESS,
+        payload
+    }
+};
+export const editOneCostFailure=(payload)=>{
+    return{
+        type:EDIT_ONE_COST_FAILURE,
+        payload
+    }
+};
+const editOneCostSuccess=(payload)=>{
+    return{
+        type:EDIT_ONE_COST_SUCCESS,
         payload
     }
 };
@@ -61,30 +85,34 @@ export const addOneCost=(payload)=>{
         })
     }
 };
-
-// export const addOneCost=(payload)=>{
-//     return{
-//         type:ADD_ONE_COST,
-//         payload
-//     }
-// };
-export const editOneCost=(payload)=>{
-    return{
-        type:EDIT_ONE_COST,
-        payload
+export const deleteOneCost=(payload)=>{
+    payload.e.stopPropagation();
+    return function(dispatch){
+        axios.delete(`http://localhost:4000/expenses/${payload.id}`)
+        .then(res=>{
+            axios.get(`http://localhost:4000/expenses`)
+            .then(res=>{
+                dispatch(deleteCostsSuccess(res.data));
+            })   
+        })
+        .catch(err=>{
+            dispatch(deleteCostsFailure(err.message))
+        })
     }
 };
 
-
-export const deleteOneCost=(payload)=>{
-    return{
-        type:DELETE_ONE_COST,
-        payload
-    }
-}
-export const filterCosts=(payload)=>{
-    return{
-        type:FILTER_COSTS,
-        payload
+export const putOneCost=(payload)=>{
+    console.log(payload)
+    return function(dispatch){
+        axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues)
+        .then(res=>{
+            axios.get(`http://localhost:4000/expenses`)
+            .then(res=>{
+                dispatch(editOneCostSuccess(res.data));
+            })   
+        })
+        .catch(err=>{
+            dispatch(editOneCostFailure(err.message))
+        })
     }
 };

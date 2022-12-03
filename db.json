@@ -54,20 +54,6 @@
     },
     {
       "id": 22
-    },
-    {
-      "name": "Ali",
-      "cost": "1499",
-      "type": "income",
-      "date": "",
-      "id": 23
-    },
-    {
-      "name": "Ali",
-      "cost": "1200",
-      "type": "income",
-      "date": "",
-      "id": 24
     }
   ]
 }

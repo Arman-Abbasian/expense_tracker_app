@@ -21,7 +21,6 @@ const CostsRedux = () => {
     const deleteHandler=(e,id)=>{
         dispatch(deleteOneCost({e,id}));
         toast.success("data deleted successfully");
-        dispatch(fetchCosts());
     }
     const rendered=()=>{
         allcosts.costs.loading &&  <p>loading...</p>
