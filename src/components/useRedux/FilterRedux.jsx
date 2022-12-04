@@ -29,11 +29,14 @@ const FilterRedux = () => {
 
      const resetHandler=()=>{
         setFilters({name:"",costRange:0,kind:""});
+        dispatch(filterCosts(filters));
         dispatch(fetchCosts());
+        
      }
 
     const submitHandler=(e)=>{
         e.preventDefault();
+        dispatch(filterCosts(filters));
         dispatch(fetchCosts());
 };
 
@@ -46,7 +49,7 @@ const FilterRedux = () => {
                 <div className="flex justify-between items-center gap-4">
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>kind</label>
-                        <select name="kind" value={allcosts.filters.kind} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
+                        <select name="kind" value={filters.kind} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             <option value="income">income</option>
                             <option value="expense">expense</option>
@@ -55,7 +58,7 @@ const FilterRedux = () => {
 
                     <div className="flex flex-col justify-center items-start gap-1 w-full">
                         <label>item</label>
-                        <select name="name" value={allcosts.filters.name} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
+                        <select name="name" value={filters.name} onChange={(e)=>changeFilterState(e)} className="text-black w-full rounded-sm">
                             <option value="">All</option>
                             {uniqueName.map(item=>{
                                 return <option key={item} value={item}>{item}</option>

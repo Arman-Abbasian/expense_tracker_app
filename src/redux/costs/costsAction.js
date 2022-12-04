@@ -1,6 +1,6 @@
 import axios from "axios";
 import { filterValue } from "../../utils/filterValue";
-import { DELETE_ONE_COST_FAILURE, DELETE_ONE_COST_SUCCESS, EDIT_ONE_COST, EDIT_ONE_COST_FAILURE, EDIT_ONE_COST_SUCCESS, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS, POST_COSTS_SUCCESS, POST_ONE_COST_FAILURE, POST_ONE_COST_SUCCESS } from "./costsType";
+import { DELETE_ONE_COST_FAILURE, DELETE_ONE_COST_SUCCESS, EDIT_ONE_COST_FAILURE, EDIT_ONE_COST_SUCCESS, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS, POST_ONE_COST_FAILURE, POST_ONE_COST_SUCCESS } from "./costsType";
 
 
 export const fetchCostsRequest=(payload)=>{
@@ -54,6 +54,12 @@ export const editOneCostFailure=(payload)=>{
 const editOneCostSuccess=(payload)=>{
     return{
         type:EDIT_ONE_COST_SUCCESS,
+        payload
+    }
+};
+export const filterCosts=(payload)=>{
+    return{
+        type:FILTER_COSTS,
         payload
     }
 };
