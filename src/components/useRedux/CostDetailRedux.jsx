@@ -5,8 +5,10 @@ import { AiFillEdit,AiFillEuroCircle,AiOutlineCalendar,AiOutlineClose } from "re
 import { toast } from "react-hot-toast";
 import { useCostActions } from "../../Providers/CostProvider";
 import { fetchCosts, putOneCost } from "../../redux/costs/costsAction";
+import { useDispatch } from "react-redux";
 
 const CostDetailRedux = ({costItem,setCostItem}) => {
+    const dispatch=useDispatch();
 
     const {initialLoading}=useCostActions();
     const [formValues,setFormValues]=useState({name:costItem.name,cost:costItem.cost,type:costItem.type,date:costItem.date});
@@ -18,10 +20,11 @@ const CostDetailRedux = ({costItem,setCostItem}) => {
         setCostItem(costItem)
     },[costItem]);
 
-    const submitHandler=(e)=>{
+    const submitHandler=async(e)=>{
         e.preventDefault();
-        putOneCost({id:costItem.id,formValues})
-        
+       await dispatch(putOneCost({id:costItem.id,formValues}));
+       setCostItem(null)
+
     };
     
     const closeHandler=()=>{

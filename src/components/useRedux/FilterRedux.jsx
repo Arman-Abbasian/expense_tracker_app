@@ -29,13 +29,11 @@ const FilterRedux = () => {
 
      const resetHandler=()=>{
         setFilters({name:"",costRange:0,kind:""});
-        dispatch(filterCosts(filters))
         dispatch(fetchCosts());
      }
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        dispatch(filterCosts(filters))
         dispatch(fetchCosts());
 };
 
