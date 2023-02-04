@@ -3,16 +3,9 @@
     {
       "name": "sell",
       "cost": "3000",
-      "type": "expense",
-      "date": "2022-11-08",
-      "id": 11
-    },
-    {
-      "name": "income",
-      "cost": "4000",
       "type": "income",
       "date": "2022-11-08",
-      "id": 12
+      "id": 11
     },
     {
       "name": "food",
@@ -30,7 +23,7 @@
     },
     {
       "name": "battery",
-      "cost": "1500",
+      "cost": "500",
       "type": "expense",
       "date": "2022-11-27",
       "id": 18
@@ -48,6 +41,13 @@
       "type": "income",
       "date": "2022-11-08",
       "id": 20
+    },
+    {
+      "name": "income",
+      "cost": "4000",
+      "type": "",
+      "date": "2023-02-04",
+      "id": 21
     }
   ]
 }
