@@ -22,6 +22,9 @@ const FilterContext = () => {
     setUniqueName(unique);
   }, [allcosts]);
 
+  const handleChange = (e, newValue) => {
+    changeFilterState(e,newValue);
+  };
   const resetHandler = () => {
     resetFilters();
   };
@@ -30,12 +33,9 @@ const FilterContext = () => {
     e.preventDefault();
     initialLoading();
   };
-  function valuetext(expenseTolerance) {
-    return `${expenseTolerance}$`;
+  function valuetext(value) {
+    return `${value} $`;
   }
-  const handleChange = (e, newValue) => {
-    setExpenseTolerance(newValue);
-  };
   return (
     <div className="mb-8">
       <button
@@ -99,14 +99,17 @@ const FilterContext = () => {
                 aria-label="Default"
                 valueLabelDisplay="auto"
               /> */}
-              <Slider
-                value={expenseTolerance}
-                min={expenseTolerance[0]}
-                max={expenseTolerance[1]}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-              />
+              {expenseTolerance && (
+                <Slider
+                  value={allcosts.filters.costRange}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  getAriaValueText={valuetext}
+                  min={expenseTolerance[0]}
+                  max={expenseTolerance[1]}
+                  name="costRange"
+                />
+              )}
             </div>
           )}
           <input

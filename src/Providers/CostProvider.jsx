@@ -12,7 +12,7 @@ const CostContextDispatcher = createContext();
 const CostProvider = ({ children }) => {
   const [allcosts, setAllCosts] = useState({
     costs: { cost: [], loading: false, error: null },
-    filters: { name: "", costRange: 0, kind: "" },
+    filters: { name: "", costRange: [0, 0], kind: "" },
   });
   return (
     <div>
