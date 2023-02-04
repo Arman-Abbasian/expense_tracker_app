@@ -2,7 +2,7 @@
   "expenses": [
     {
       "name": "sell",
-      "cost": "2000",
+      "cost": "3000",
       "type": "expense",
       "date": "2022-11-08",
       "id": 11
