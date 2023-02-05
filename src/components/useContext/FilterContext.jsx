@@ -11,9 +11,9 @@ const FilterContext = () => {
   const { initialLoading, changeFilterState, resetFilters } = useCostActions();
 
   const [expenseTolerance, setExpenseTolerance] = useState([1000, 3000]);
+  const [minMaxValue, setMinMaxValue] = useState(null);
   const [uniqueName, setUniqueName] = useState([]);
   const [showFilterSection, setShowFilterSection] = useState(false);
-  const [minMaxValue, setMinMaxValue] = useState(null);
 
   useEffect(() => {
     if (allcosts.costs.cost) {
