@@ -85,7 +85,7 @@ export const useCostActions = () => {
   const resetFilters = () => {
     setAllCosts({
       ...allcosts,
-      filters: { name: "", costRange: 0, kind: "" },
+      filters: { name: "", costRange: [0, 0], kind: "" },
     });
   };
   //change filter state

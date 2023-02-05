@@ -1,5 +1,7 @@
 import { Slider } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useCostActions, useCosts } from "../../Providers/CostProvider";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
@@ -11,6 +13,20 @@ const FilterContext = () => {
   const [expenseTolerance, setExpenseTolerance] = useState([1000, 3000]);
   const [uniqueName, setUniqueName] = useState([]);
   const [showFilterSection, setShowFilterSection] = useState(false);
+  const [minMaxValue, setMinMaxValue] = useState(null);
+
+  useEffect(() => {
+    if (allcosts.costs.cost) {
+      axios
+        .get("http://localhost:4000/expenses")
+        .then((res) => {
+          let maxValue = Math.max(...res.data.map((o) => o.cost));
+          let minValue = Math.min(...res.data.map((o) => o.cost));
+          setMinMaxValue([minValue, maxValue]);
+        })
+        .catch((err) => toast.error(err.message));
+    }
+  }, []);
 
   useEffect(() => {
     //get the tolerance of your costs
@@ -23,7 +39,7 @@ const FilterContext = () => {
   }, [allcosts]);
 
   const handleChange = (e, newValue) => {
-    changeFilterState(e,newValue);
+    changeFilterState(e, newValue);
   };
   const resetHandler = () => {
     resetFilters();
@@ -89,24 +105,14 @@ const FilterContext = () => {
           {expenseTolerance && (
             <div>
               <label htmlFor="expense">expense range</label>
-              {/* <Slider
-                defaultValue={expenseTolerance.minCost}
-                value={allcosts.filters.costRange}
-                min={expenseTolerance.minCost}
-                max={expenseTolerance.maxCost}
-                onChange={(e) => changeFilterState(e)}
-                name="costRange"
-                aria-label="Default"
-                valueLabelDisplay="auto"
-              /> */}
-              {expenseTolerance && (
+              {expenseTolerance && minMaxValue && (
                 <Slider
                   value={allcosts.filters.costRange}
                   onChange={handleChange}
                   valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
-                  min={expenseTolerance[0]}
-                  max={expenseTolerance[1]}
+                  min={minMaxValue[0]}
+                  max={minMaxValue[1]}
                   name="costRange"
                 />
               )}
