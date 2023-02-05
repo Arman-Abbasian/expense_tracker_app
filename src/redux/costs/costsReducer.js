@@ -7,7 +7,7 @@ const initialState={
     costs:[],
     error:"",
     laoding:false,
-    filters:{name:"",costRange:0,kind:""}
+    filters:{name:"",costRange:[0,0],kind:""}
 }
 export const costsReducer=(state=initialState,action)=>{
     switch (action.type) {
@@ -18,6 +18,7 @@ export const costsReducer=(state=initialState,action)=>{
         case FETCH_COSTS_SUCCESS:{
             console.log(state)
             const filteredItems= filterValue(action.payload,state.filters);
+            console.log(action.payload,state.filters)
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
         case FETCH_COSTS_FAILURE:{

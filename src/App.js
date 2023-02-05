@@ -37,24 +37,25 @@ function App() {
       <Balance />
     </Layout> */}
 
-    <Layout>
+    {/* useContext */}
+    {/* <Layout>
       <CostProvider>
         <ShowTotalCostsContext />
         <FilterContext />
         <FormContext />
         <CostsContext />
       </CostProvider>
-    </Layout>
+    </Layout> */}
 
     
-      {/* <Provider store={store}>
+      <Provider store={store}>
       <Layout>
         <ShowTotalCostsRedux />
         <FormRedux />
         <FilterRedux />
         <CostsRedux />
       </Layout>
-      </Provider> */}
+      </Provider>
 
       {/* <Provider store={store}>
         <Layout>

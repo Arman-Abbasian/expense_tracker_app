@@ -3,7 +3,7 @@ import { filterValue } from "../../utils/filterValue";
 import { DELETE_ONE_COST_FAILURE, DELETE_ONE_COST_SUCCESS, EDIT_ONE_COST_FAILURE, EDIT_ONE_COST_SUCCESS, FETCH_COSTS_FAILURE, FETCH_COSTS_REQUEST, FETCH_COSTS_SUCCESS, FILTER_COSTS, POST_ONE_COST_FAILURE, POST_ONE_COST_SUCCESS } from "./costsType";
 
 
-export const fetchCostsRequest=(payload)=>{
+export const fetchCostsRequest=()=>{
     return{
         type:FETCH_COSTS_REQUEST,
     }
@@ -77,7 +77,6 @@ export const fetchCosts=()=>{
     }
 };
 export const addOneCost=(payload)=>{
-    console.log(payload)
     return function(dispatch){
         axios.post(`http://localhost:4000/expenses`,payload)
         .then(res=>{
@@ -108,7 +107,6 @@ export const deleteOneCost=(payload)=>{
 };
 
 export const putOneCost=(payload)=>{
-    console.log(payload)
     return function(dispatch){
         axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues)
         .then(res=>{
