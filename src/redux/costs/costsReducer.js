@@ -12,21 +12,17 @@ const initialState={
 export const costsReducer=(state=initialState,action)=>{
     switch (action.type) {
         case FETCH_COSTS_REQUEST:{
-            console.log(state)
             return {costs:[],error:"",laoding:true,filters:state.filters}
         };
         case FETCH_COSTS_SUCCESS:{
-            console.log(state)
             const filteredItems= filterValue(action.payload,state.filters);
             console.log(action.payload,state.filters)
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
         case FETCH_COSTS_FAILURE:{
-            console.log(state)
             return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         }
         case POST_ONE_COST_SUCCESS:{
-            console.log(action.payload)
             const filteredItems=filterValue(action.payload,state.filters);
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
@@ -36,7 +32,6 @@ export const costsReducer=(state=initialState,action)=>{
 
         //
         case DELETE_ONE_COST_SUCCESS:{
-            console.log(action.payload)
             const filteredItems=filterValue(action.payload,state.filters);
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
@@ -44,7 +39,6 @@ export const costsReducer=(state=initialState,action)=>{
             return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         };
         case EDIT_ONE_COST_SUCCESS:{
-            console.log(action.payload)
             const filteredItems=filterValue(action.payload,state.filters);
             return {costs:filteredItems,error:"",laoding:false,filters:state.filters}
         };
@@ -52,8 +46,7 @@ export const costsReducer=(state=initialState,action)=>{
             return {costs:[],error:action.payload,laoding:false,filters:state.filters}
         };
         case FILTER_COSTS:{
-            console.log(action.payload)
-            return {costs:state.costs,error:"",laoding:false,filters:action.payload}
+            return {costs:state.costs,error:state.error,laoding:state.laoding,filters:action.payload}
         }
         
             

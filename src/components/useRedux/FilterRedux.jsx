@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCosts } from "../../redux/costs/costsAction";
+import { fetchCosts, filterState } from "../../redux/costs/costsAction";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
@@ -32,38 +32,35 @@ const FilterRedux = () => {
 
   useEffect(() => {
     if (allcosts.costs) {
-        console.log(allcosts)
       axios
         .get("http://localhost:4000/expenses")
         .then((res) => {
           let maxValue = Math.max(...res.data.map((o) => o.cost));
-          console.log(maxValue)
+          console.log(maxValue);
           let minValue = Math.min(...res.data.map((o) => o.cost));
-          console.log(minValue)
+          console.log(minValue);
           setMinMaxValue([minValue, maxValue]);
         })
         .catch((err) => toast.error(err.message));
     }
   }, [allcosts.cost]);
+
   function valuetext(value) {
     return `${value} $`;
   }
   const changeFilterState = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
-  const handleChange = (e) => {
-    setFilters({...filters,costRange:e.target.value})
-  };
 
   const resetHandler = () => {
-    setFilters({ name: "", costRange: 0, kind: "" });
-
+    setFilters({ name: "", costRange: [0, 0], kind: "" });
+    dispatch(filterState(filters));
     dispatch(fetchCosts());
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(changeFilterState(filters));
+    dispatch(filterState(filters));
     dispatch(fetchCosts());
   };
 
@@ -123,7 +120,7 @@ const FilterRedux = () => {
             {expenseTolerance && minMaxValue && (
               <Slider
                 value={filters.costRange}
-                onChange={handleChange}
+                onChange={changeFilterState}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 min={minMaxValue[0]}

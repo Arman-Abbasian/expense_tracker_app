@@ -23,6 +23,7 @@ const CostDetailRedux = ({costItem,setCostItem}) => {
     const submitHandler=async(e)=>{
         e.preventDefault();
        await dispatch(putOneCost({id:costItem.id,formValues}));
+       toast.success("cost item updated successfully")
        setCostItem(null)
 
     };

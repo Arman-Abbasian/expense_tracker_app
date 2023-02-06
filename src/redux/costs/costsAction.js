@@ -57,7 +57,7 @@ const editOneCostSuccess=(payload)=>{
         payload
     }
 };
-export const changeFilterState=(payload)=>{
+export const filterState=(payload)=>{
     return{
         type:FILTER_COSTS,
         payload
@@ -83,7 +83,7 @@ export const addOneCost=(payload)=>{
             axios.get(`http://localhost:4000/expenses`)
             .then(res=>{
                 dispatch(postCostsSuccess(res.data));
-            })   
+            })  
         })
         .catch(err=>{
             dispatch(postCostsFailure(err.message))
