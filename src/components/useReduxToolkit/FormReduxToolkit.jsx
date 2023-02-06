@@ -26,10 +26,18 @@ const FormRedux = ({ showForm }) => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(addAsyncCost({ formValues, filters: allcosts.filters }));
-    // dispatch(getAsyncCosts(allcosts.filters));
-    toast.success("data added successfully");
-    setFormValues({ name: "", cost: 0, type: "", date: "" });
+    if (
+      formValues.cost > 0 &&
+      formValues.date &&
+      formValues.name !== "" &&
+      formValues.type !== ""
+    ) {
+      dispatch(addAsyncCost({ formValues, filters: allcosts.filters }));
+      toast.success("data added successfully");
+      setFormValues({ name: "", cost: 0, type: "", date: "" });
+    } else {
+      toast.error("please fill all fields");
+    }
   };
   return (
     <div
