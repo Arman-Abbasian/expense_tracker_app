@@ -57,7 +57,7 @@ const editOneCostSuccess=(payload)=>{
         payload
     }
 };
-export const filterCosts=(payload)=>{
+export const changeFilterState=(payload)=>{
     return{
         type:FILTER_COSTS,
         payload

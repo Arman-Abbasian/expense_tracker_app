@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCosts, filterCosts } from "../../redux/costs/costsAction";
+import { fetchCosts } from "../../redux/costs/costsAction";
 import { tolerance } from "../../utils/costCalculate";
 import { uniqueOption } from "../../utils/uniqueValue";
 
@@ -11,11 +11,15 @@ const FilterRedux = () => {
   const allcosts = useSelector((state) => state.costs);
   const dispatch = useDispatch();
 
-  const [filters, setFilters] = useState({ name: "", costRange: [0,0], kind: "" });
   const [uniqueName, setUniqueName] = useState([]);
   const [showFilterSection, setShowFilterSection] = useState(false);
-  const [expenseTolerance, setExpenseTolerance] = useState([1000, 3000]);
+  const [expenseTolerance, setExpenseTolerance] = useState([500, 4000]);
   const [minMaxValue, setMinMaxValue] = useState(null);
+  const [filters, setFilters] = useState({
+    name: "",
+    costRange: [0, 0],
+    kind: "",
+  });
 
   useEffect(() => {
     //get the tolerance of your costs
@@ -27,37 +31,39 @@ const FilterRedux = () => {
   }, [allcosts]);
 
   useEffect(() => {
-    if (allcosts.costs.cost) {
+    if (allcosts.costs) {
+        console.log(allcosts)
       axios
         .get("http://localhost:4000/expenses")
         .then((res) => {
           let maxValue = Math.max(...res.data.map((o) => o.cost));
+          console.log(maxValue)
           let minValue = Math.min(...res.data.map((o) => o.cost));
+          console.log(minValue)
           setMinMaxValue([minValue, maxValue]);
         })
         .catch((err) => toast.error(err.message));
     }
-  }, []);
+  }, [allcosts.cost]);
   function valuetext(value) {
     return `${value} $`;
   }
-
   const changeFilterState = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
-  const handleChange = (e, newValue) => {
-    changeFilterState(e, newValue);
+  const handleChange = (e) => {
+    setFilters({...filters,costRange:e.target.value})
   };
 
   const resetHandler = () => {
     setFilters({ name: "", costRange: 0, kind: "" });
-    dispatch(filterCosts(filters));
+
     dispatch(fetchCosts());
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(filterCosts(filters));
+    dispatch(changeFilterState(filters));
     dispatch(fetchCosts());
   };
 
@@ -111,22 +117,21 @@ const FilterRedux = () => {
               </select>
             </div>
           </div>
-          {expenseTolerance && (
-            <div>
-              <label htmlFor="expense">expense range</label>
-              {expenseTolerance && minMaxValue && (
-                <Slider
-                  value={allcosts.filters.costRange}
-                  onChange={handleChange}
-                  valueLabelDisplay="auto"
-                  getAriaValueText={valuetext}
-                  min={minMaxValue[0]}
-                  max={minMaxValue[1]}
-                  name="costRange"
-                />
-              )}
-            </div>
-          )}
+
+          <div>
+            <label htmlFor="expense">expense range</label>
+            {expenseTolerance && minMaxValue && (
+              <Slider
+                value={filters.costRange}
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                min={minMaxValue[0]}
+                max={minMaxValue[1]}
+                name="costRange"
+              />
+            )}
+          </div>
           <input
             type="submit"
             value="apply filter"
