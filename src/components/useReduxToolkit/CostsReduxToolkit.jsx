@@ -30,7 +30,7 @@ const CostsReduxToolkit = () => {
         allcosts.costs.error &&  <p>{allcosts.costs.error.message}</p>
         allcosts.costs.length===0 && <p className="text-gray-200">no cost added</p>
         return (
-            <div className="flex flex-col justify-center items-center gap-4 w-full">
+            <div className="flex flex-col justify-center items-center gap-4 w-full mb-10">
             {costItem && <CostDetailReduxToolkit costItem={costItem} setCostItem={setCostItem}/>}
             {allcosts.costs.map(item=>(
                 <CostReduxToolkit key={item.id} name={item.name} cost={item.cost} type={item.type} onDelete={(e)=>deleteHandler(e,item.id)} showDetail={()=>showItemDetail(item.id)} />

@@ -47,7 +47,7 @@ const initialState = {
   costs:[],
   error:null,
   loading:false,
-  filters:{name:"",costRange:0,kind:""}
+  filters:{name:"",costRange:[0,0],kind:""}
 }
 
 export const costsSlice = createSlice({
@@ -58,7 +58,6 @@ export const costsSlice = createSlice({
   extraReducers:{
   
     [getAsyncCosts.fulfilled]: (state,action) => {
-      console.log(action.payload)
       const filteredCosts= filterValue(action.payload.data,action.payload.filters)
       return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
@@ -69,12 +68,10 @@ export const costsSlice = createSlice({
       return {costs:[],loading:false,error:action.payload,filters:state.filters}
     },
     [removeAsyncCost.fulfilled]: (state,action) => {
-      console.log(action.payload);
       const filteredCosts= filterValue(action.payload.data,action.payload.filters)
       return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
     [addAsyncCost.fulfilled]: (state,action) => {
-      console.log(action.payload);
       const filteredCosts= filterValue(action.payload.data,action.payload.filters)
       return {costs:filteredCosts,loading:false,error:null,filters:action.payload.filters}
     },
