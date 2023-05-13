@@ -40,11 +40,6 @@ export const useCostActions = () => {
     axios
       .get(`http://localhost:4000/expenses`)
       .then((res) => {
-        setAllCosts({
-          ...allcosts,
-          costs: { cost: res.data, loading: false, error: null },
-        });
-        console.log(allcosts.filters);
         const filteredValues = filterValue(res.data, allcosts.filters);
         setAllCosts({
           ...allcosts,
@@ -59,7 +54,6 @@ export const useCostActions = () => {
         })
       );
   };
-
   //add one comment
   const addOneCost = (payload) => {
     axios

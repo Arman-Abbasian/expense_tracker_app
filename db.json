@@ -24,7 +24,7 @@
     {
       "name": "income",
       "cost": "3000",
-      "type": "income",
+      "type": "expense",
       "date": "2022-11-08",
       "id": 19
     }

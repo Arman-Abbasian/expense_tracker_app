@@ -38,14 +38,14 @@ function App() {
     </Layout> */}
 
     {/* useContext */}
-    {/* <Layout>
+    <Layout>
       <CostProvider>
         <ShowTotalCostsContext />
         <FilterContext />
         <FormContext />
         <CostsContext />
       </CostProvider>
-    </Layout> */}
+    </Layout>
 
     {/* redux */}
       {/* <Provider store={store}>
@@ -58,14 +58,14 @@ function App() {
       </Provider> */}
 
       {/* redux toolkit */}
-      <Provider store={store}>
+      {/* <Provider store={store}>
         <Layout>
           <ShowTotalCostsReduxToolkit />
           <FormReduxToolkit />
           <FilterReduxToolkit /> 
           <CostsReduxToolkit />
         </Layout>
-      </Provider>
+      </Provider> */}
 
 
 
