@@ -12,14 +12,11 @@ export const filterValue=(balance,filters)=>{
     }else{
         filterName=filterKind.filter(item=>item.name===filters.name);
     }
-    console.log(filterName);
     let filterCostRange=filterName.filter(item=>parseFloat(item.cost)>=filters.costRange[0])
-    console.log(filterCostRange)
     if(filters.costRange[1]===0){
         return filterCostRange
     }  else{
         filterCostRange=filterCostRange.filter(item=>parseFloat(item.cost)<=filters.costRange[1]);
-        console.log(filterCostRange)
         return filterCostRange;
     }
         

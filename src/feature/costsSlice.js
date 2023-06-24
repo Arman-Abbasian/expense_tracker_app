@@ -5,7 +5,7 @@ import { filterValue } from '../utils/filterValue';
 
 export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (payload,{rejectWithValue})=>{
   try {
-    const response=await axios.get(`http://localhost:4000/expenses`);
+    const response=await axios.get(`https://api.arman-abasian.ir/expenses`);
     return {data:response.data,filters:payload};
   } catch (error) {
     return rejectWithValue([],error)
@@ -14,8 +14,8 @@ export const getAsyncCosts=createAsyncThunk("costs/getAsyncCosts", async (payloa
 
 export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,{rejectWithValue})=>{
   try {
-    await axios.post(`http://localhost:4000/expenses`,payload.formValues)
-    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    await axios.post(`https://api.arman-abasian.ir/expenses`,payload.formValues)
+    const {data}=await axios.get(`https://api.arman-abasian.ir/expenses`)
     return {data:data,filters:payload.filters};
   } catch (error) {
     return rejectWithValue([],error)
@@ -23,8 +23,8 @@ export const addAsyncCost=createAsyncThunk("costs/addAsyncCost", async (payload,
 });
 export const removeAsyncCost=createAsyncThunk("costs/removeAsyncCost", async (payload,{rejectWithValue})=>{
   try {
-    await axios.delete(`http://localhost:4000/expenses/${payload.id}`)
-    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    await axios.delete(`https://api.arman-abasian.ir/expenses/${payload.id}`)
+    const {data}=await axios.get(`https://api.arman-abasian.ir/expenses`)
     return  {data:data,filters:payload.filters};
   } catch (error) {
     return rejectWithValue([],error)
@@ -33,8 +33,8 @@ export const removeAsyncCost=createAsyncThunk("costs/removeAsyncCost", async (pa
 export const changeAsyncCost=createAsyncThunk("costs/changeAsyncCost", async (payload,{rejectWithValue})=>{
   try {
     console.log(payload)
-    await axios.put(`http://localhost:4000/expenses/${payload.id}`,payload.formValues);
-    const {data}=await axios.get(`http://localhost:4000/expenses`)
+    await axios.put(`https://api.arman-abasian.ir/expenses/${payload.id}`,payload.formValues);
+    const {data}=await axios.get(`https://api.arman-abasian.ir/expenses`)
     return  {data:data,filters:payload.filters}; 
     
   } catch (error) {

@@ -33,7 +33,7 @@ const FilterReduxToolkit = () => {
   useEffect(() => {
     if (allcosts.costs) {
       axios
-        .get("http://localhost:4000/expenses")
+        .get("https://api.arman-abasian.ir/expenses")
         .then((res) => {
           let maxValue = Math.max(...res.data.map((o) => o.cost));
           console.log(maxValue);
