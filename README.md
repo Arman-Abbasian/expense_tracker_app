@@ -11,7 +11,8 @@
 <p width="960" style="padding-right:40px;" align="left" >react-hot-toast</p>
 
 # summary of project
-In this project i worked on a website that has a introduction section and performace sections to show the performance of personnels and performance on some key indexes of a company. 
+In this project i worked on a expense-tracker app to manage the costs and incomes of a person. i try to use from three method: 1-useContext, 2-redux, 3-redux-toolkit
+to make and manage global states and compare this three methods.
 
 # overview of project
 
