@@ -6,7 +6,7 @@
 <br />
 <br />
 
-<p width="960" style="padding-right: 10px;" align="left" >recharts</p>
+<p width="960" style="padding-right: 10px;" align="left" >react-icons</p>
 <p width="960" style="padding-right: 10px;" align="left" >json-server</p>
 <p width="960" style="padding-right:40px;" align="left" >react-hot-toast</p>
 
