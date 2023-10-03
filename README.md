@@ -2,7 +2,6 @@
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="36"  alt="HTML5" style="padding-right:10px;" align="left"  />
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="36"  alt="react" style="padding-right:10px;" align="left"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" width="36" alt="tailwind" style="padding-right:10px;" align="left" />
-<img src="https://res.cloudinary.com/practicaldev/image/fetch/s---xCsVK0j--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://reacttraining.com/images/blog/reach-react-router-future.png"  alt="react-router-dom" width="36" alt="Terminal"  style="padding-right:10px;" align="left" />
 <img src="https://seeklogo.com/images/A/axios-logo-CD0C90458F-seeklogo.com.png" width="70" height="30" alt="axios" style="padding-right:10px;" align="left" />
 <br />
 <br />
