@@ -3,7 +3,9 @@
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="36"  alt="react" style="padding-right:10px;" align="left"/>
 <img src="https://img.favpng.com/6/2/11/redux-react-javascript-freecodecamp-npm-png-favpng-6F2x50visKuC0trBQ0952Cm1E_t.jpg" width="36"  alt="redux" style="padding-right:10px;" align="left"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" width="36" alt="tailwind" style="padding-right:10px;" align="left" />
-
+<img src="https://seeklogo.com/images/A/axios-logo-CD0C90458F-seeklogo.com.png" width="70" height="30" alt="axios" style="padding-right:10px;" align="left" />
+<br />
+<br />
 
 <p width="960" style="padding-right: 10px;" align="left" >react-icons</p>
 <p width="960" style="padding-right: 10px;" align="left" >json-server</p>
